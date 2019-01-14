@@ -9,9 +9,9 @@ app.post("/", (req, res) => {
         if(err){
             console.log(err);
         }
-        console.log(req1);
+        console.log(req);
         return res.status(201).json({
-            'imageUrl': req1.file.location
+            'imageUrl': req.file.location
         });
     });
   });
