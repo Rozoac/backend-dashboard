@@ -11,14 +11,16 @@ var s3 = new aws.S3()
  
 var upload = multer({
   storage: multerS3({
+    dest: 'usuarios',
     s3: s3,
     bucket: 'econtainers',
     acl: 'public-read',
     metadata: function (req, file, cb) {
-      cb(null, {fieldName: 'EJEMPLO'});
+      console.log(file);
+      cb(null, {fieldName: file.fieldname});
     },
     key: function (req, file, cb) {
-      cb(null, 'hola.png');
+      cb(null, `${Date.now().toString()}.png`)
     }
   })
 })
