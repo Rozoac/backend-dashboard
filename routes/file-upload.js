@@ -5,11 +5,7 @@ const singleUpload = upload.single('image');
 
 app.post("/", (req, res) => {
    
-    singleUpload(req1, res, (err) =>{
-        if(err){
-            console.log(err);
-        }
-        console.log(req);
+    singleUpload(req, res, () =>{
         return res.status(201).json({
             'imageUrl': req.file.location
         });
