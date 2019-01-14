@@ -7,7 +7,8 @@ app.post("/", (req, res) => {
    
     singleUpload(req, res, () =>{
         return res.status(201).json({
-            'imageUrl': req.file.location
+            'imageUrl': req.file.location,
+            'data': req
         });
     });
   });
