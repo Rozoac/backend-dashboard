@@ -18,7 +18,7 @@ var upload = multer({
       cb(null, {fieldName: 'EJEMPLO'});
     },
     key: function (req, file, cb) {
-      cb(null, Date.now().toString())
+      cb(null, 'hola');
     }
   })
 })
