@@ -5,10 +5,10 @@ const singleUpload = upload.single('image');
 
 app.post("/", (req, res) => {
    
-    singleUpload(req, res, () =>{
+    singleUpload(req1, res, () =>{
+        console.log(req1);
         return res.status(201).json({
-            'imageUrl': req.file.location,
-            'data': req
+            'imageUrl': req1.file.location
         });
     });
   });
