@@ -1,12 +1,15 @@
-// REQUIRES
+/*=================================================
+                    REQUIRES
+==================================================*/
+require("./config/config");
 var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-
-//INICIACION DE VARIABLES
 var app = express();
 
-//CORS
+/*=================================================
+                    CORS
+==================================================*/
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -21,9 +24,9 @@ app.use(bodyParser.urlencoded({ expented: false }));
 app.use(bodyParser.json());
 
 //Importar rutas
-var appRoutes = require("./routes/app");
+  var appRoutes = require("./routes/app");
   var usuarioRoutes = require("./routes/usuario");
-   var loginRoutes = require("./routes/login");
+  var loginRoutes = require("./routes/login");
   var rolRoutes = require("./routes/rol");
   var paisRoutes = require("./routes/pais");
   var ciudadRoutes = require("./routes/ciudad");
@@ -43,16 +46,21 @@ app.use("/ciudad", ciudadRoutes);
 // app.use("/busqueda", busquedaRoutes);
 // app.use("/upload", uploadRoutes);
 // app.use("/img", imagenesRoutes);
-//CONEXION A LA BASE DE DATOS
-mongoose.connection.openUri(
-  "mongodb://localhost:27017/dashboard",
+
+
+/*=================================================
+                    BD
+==================================================*/
+mongoose.connect(
+  process.env.URLDB,
   (err, res) => {
     if (err) throw err;
-    console.log("Base de datos online");
+    console.log("BASE DE DATOS ONLINE");
+    // console.log(res);
   }
 );
 
 // SERVIDOR
-app.listen(3000, () => {
-  console.log("SERVIDOR ARRIBA EN EL PUERTO 3000");
+app.listen(process.env.PORT, () => {
+  console.log(`ESCUCHANDO EN EL PUERTO ${process.env.PORT}`);
 });

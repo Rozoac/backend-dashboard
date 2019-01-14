@@ -7,6 +7,38 @@ var mdAutenticacion = require("../middlewares/autenticacion");
 var moment = require("moment");
 
 // =============================
+// OBTENER USIARIO
+// =============================
+app.get("/:id", (req, res, next) => {
+  var id = req.params.id;
+
+  Usuario.findById(id)
+  .populate('segmento')
+  .populate('id_rol')
+    .exec((err, usuario) => {
+      if (err) {
+        return res
+          .status(500)
+          .json({
+            ok: false,
+            mensaje: "Error cargando usuario",
+            error: err
+          });
+      }
+      if (!usuario) {
+        return res
+          .status(400)
+          .json({
+            ok: false,
+            mensaje: "El usuario con el id " + id + " no existe",
+            errors: { message: "No existe un usuario con ese ID" }
+          });
+      }
+      res.status(200).json({ ok: true, usuario });
+    });
+});
+
+// =============================
 // OBTENER TODOS LOS USUARIOS
 // =============================
 
