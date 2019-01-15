@@ -27,30 +27,14 @@ var id = req.params.id;
 
   function subirPorTipo(req, tipo, id, res, nombreArchivo) {
     if (tipo === "usuarios") {
-      Usuario.findById(id, (err, usuario) => {
-        if (!usuario) {
-          return res.status(400).json({
-            ok: false,
-            mensaje: "Usuario no existe",
-            error: { mensaje: "Usuario no existe" }
-          });
-        }
-        usuario.imagen = nombreArchivo;
-        usuario.save((err, usuarioActualizado) => {
-            usuarioActualizado.password = ':)';
+     
             return res.status(200).json({
               ok: true,
               mensaje: "Imagen de usuario actualizada",
               imageUrl: req,
               usuario: usuarioActualizado
             });
-          });
-
-    
-      });
-    }
-
-     
+          };
 
 
   }
