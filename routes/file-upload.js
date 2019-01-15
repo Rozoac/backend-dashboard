@@ -8,7 +8,7 @@ app.post("/:tipo/:id", (req, res) => {
 var tipo = req.params.tipo;
 var id = req.params.id;
  
-    singleUpload(req, response, (err) =>{
+    singleUpload(req, res, (err) =>{
         if(err){
             return res.status(422).send({
                 errors: [{
@@ -17,7 +17,7 @@ var id = req.params.id;
                 }] 
             });
         }
-        subirPorTipo(tipo, id, req.file.location, response, req.file.location);
+        subirPorTipo(tipo, id, req.file.location, res, req.file.location);
         // return res.status(201).json({
         //     'imageUrl': req.file.location
         // });
