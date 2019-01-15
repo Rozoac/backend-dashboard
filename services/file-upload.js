@@ -10,9 +10,12 @@ aws.config.update({
 var s3 = new aws.S3()
 
 const fileFilter = (req, file, cb) => { 
-  console.log(file);
+  // var archivo = file.mimetype;
+  // var nombreCortado = archivo.name.split(".");
+  // var extensionArchivo = nombreCortado[nombreCortado.length - 1];
+  console.log(req.files.image);
+
   if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    console.log("etro al if");
     cb(null, true);
   }
   else{

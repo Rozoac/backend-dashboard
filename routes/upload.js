@@ -19,10 +19,10 @@ app.put("/:tipo/:id", (req, res, next) => {
   if (tiposValidos.indexOf(tipo) < 0) {
     return res.status(400).json({
       ok: false,
-      mensaje: "Tipo de coelccion no es valida",
+      mensaje: "Tipo de  no es valida",
       error: {
         mensaje: "seleccione un tipo valido"
-      }
+      }7u
     });
   }
 
