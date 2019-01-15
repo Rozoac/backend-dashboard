@@ -12,9 +12,11 @@ var s3 = new aws.S3()
 const fileFilter = (req, file, cb) => { 
   console.log(file);
   if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    console.log("etro al if");
     cb(null, true);
   }
   else{
+    console.log("etro al else");
     cb(new Error('Solo imagenes'),false);
     }
   }
