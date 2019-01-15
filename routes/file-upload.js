@@ -26,7 +26,7 @@ var id = request.params.id;
 
 
   function subirPorTipo(req, tipo, id, res, nombreArchivo) {
-    return response.status(201).json({
+    return res.status(201).json({
 
         'imageUrl': nombreArchivo
     });
