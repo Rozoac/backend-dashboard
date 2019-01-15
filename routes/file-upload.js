@@ -27,12 +27,25 @@ var id = request.params.id;
 
   function subirPorTipo(req, tipo, id, res, nombreArchivo) {
 
-    
-    return res.status(201).json({
-
-        'imageUrl': nombreArchivo,
+    if (tipo === "usuarios") {
+        Usuario.findById(id, (err, usuario) => {
+          if (!usuario) {
+            return res.status(400).json({
+              ok: true,
+              mensaje: "Usuario no existe",
+              error: { mensaje: "Usuario no existe" }
+            });
+          }
+          return res.status(400).json({
+            ok: true,
+            mensaje: "Usuario existe",
+            'imageUrl': nombreArchivo,
         'tipo': tipo
-    });
+            
+          });
+  
+        });
+      }
   }
 
   module.exports = app;
