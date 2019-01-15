@@ -36,13 +36,12 @@ var id = request.params.id;
               error: { mensaje: "Usuario no existe" }
             });
           }
+
           return res.status(400).json({
             ok: true,
-            mensaje: "Usuario existe",
-            'imageUrl': nombreArchivo,
-        'tipo': tipo
-            
+            usuario
           });
+
   
         });
       }
