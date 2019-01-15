@@ -8,8 +8,19 @@ aws.config.update({
   region: 'us-east-2'
 })
 var s3 = new aws.S3()
+
+const fileFilter = (req, file, cb) => { 
+  console.log(file);
+  if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(null, true);
+  }
+  else{
+    cb(new Error('Solo imagenes'),false);
+    }
+  }
  
 var upload = multer({
+  fileFilter,
   storage: multerS3({
     s3: s3,
     bucket: 'econtainers',
