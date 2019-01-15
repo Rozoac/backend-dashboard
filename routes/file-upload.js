@@ -8,7 +8,7 @@ app.post("/:tipo/:id", (req, res) => {
 var tipo = req.params.tipo;
 var id = req.params.id;
  
-    singleUpload(reqUpload, response, (err) =>{
+    singleUpload(req, response, (err) =>{
         if(err){
             return res.status(422).send({
                 errors: [{
@@ -17,7 +17,7 @@ var id = req.params.id;
                 }] 
             });
         }
-        subirPorTipo(tipo, id, req.file.location, response, reqUpload);
+        subirPorTipo(tipo, id, req.file.location, response, req);
         // return res.status(201).json({
         //     'imageUrl': req.file.location
         // });
@@ -25,7 +25,7 @@ var id = req.params.id;
   });
 
 
-  function subirPorTipo(tipo, id, nombreArchivo, res, reqUpload) {
+  function subirPorTipo(tipo, id, nombreArchivo, res, req) {
     if (tipo === "usuarios") {
       Usuario.findById(id, (err, usuario) => {
         if (!usuario) {
@@ -42,7 +42,7 @@ var id = req.params.id;
           return res.status(200).json({
             ok: true,
             mensaje: "Imagen de usuario actualizada",
-            imageUrl: reqUpload.file.location,
+            imageUrl: req.file.location,
             usuario: usuarioActualizado
           });
         });
