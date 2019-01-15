@@ -13,8 +13,9 @@ let extensionArchivo;
 const fileFilter = (req, file, cb) => { 
   var archivo = file.originalname;
   var nombreCortado = archivo.split(".");
-  this.extensionArchivo = nombreCortado[nombreCortado.length - 1];
+  extensionArchivo = nombreCortado[nombreCortado.length - 1];
   console.log(extensionArchivo);
+  console.log(archivo);
  
 
   // TIPOS DE EXTENSIONES
