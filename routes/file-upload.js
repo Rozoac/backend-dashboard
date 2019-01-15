@@ -17,10 +17,10 @@ var id = req.params.id;
                 }] 
             });
         }
-        subirPorTipo(tipo, id, req.file.location, res, req.file.location);
-        // return res.status(201).json({
-        //     'imageUrl': req.file.location
-        // });
+        // subirPorTipo(tipo, id, req.file.location, res, req.file.location);
+        return res.status(201).json({
+            'imageUrl': req.file.location
+        });
     });
   });
 
