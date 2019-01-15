@@ -5,8 +5,8 @@ const singleUpload = upload.single('image');
 var Usuario = require("../models/usuario");
 
 app.post("/:tipo/:id", (request, response) => {
-var tipo = req.params.tipo;
-var id = req.params.id;
+var tipo = request.params.tipo;
+var id = request.params.id;
  
     singleUpload(req, res, (err) =>{
         if(err){
