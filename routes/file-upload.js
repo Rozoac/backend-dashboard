@@ -17,7 +17,7 @@ var id = req.params.id;
                 }] 
             });
         }
-        subirPorTipo(res, req, tipo, id, response, req.file.location);
+        subirPorTipo(req, tipo, id, response, req.file.location);
         // return res.status(201).json({
         //     'imageUrl': req.file.location
         // });
@@ -25,7 +25,7 @@ var id = req.params.id;
   });
 
 
-  function subirPorTipo(res, req, tipo, id, response, nombreArchivo) {
+  function subirPorTipo(req, tipo, id, response, nombreArchivo) {
     if (tipo === "usuarios") {
       Usuario.findById(id, (err, usuario) => {
         if (!usuario) {
