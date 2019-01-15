@@ -11,7 +11,6 @@ var s3 = new aws.S3()
  
 var upload = multer({
   storage: multerS3({
-    dest: 'usuarios/',
     s3: s3,
     bucket: 'econtainers',
     acl: 'public-read',
