@@ -17,7 +17,7 @@ var id = req.params.id;
                 }] 
             });
         }
-        subirPorTipo(tipo, id, req.file.location, response, req);
+        subirPorTipo(tipo, id, req.file.location, response, req.file.location);
         // return res.status(201).json({
         //     'imageUrl': req.file.location
         // });
@@ -42,7 +42,7 @@ var id = req.params.id;
           return res.status(200).json({
             ok: true,
             mensaje: "Imagen de usuario actualizada",
-            imageUrl: req.file.location,
+            imageUrl: req,
             usuario: usuarioActualizado
           });
         });
