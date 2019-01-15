@@ -13,6 +13,7 @@ const fileFilter = (req, file, cb) => {
   var archivo = file.originalname;
   var nombreCortado = archivo.split(".");
   var extensionArchivo = nombreCortado[nombreCortado.length - 1];
+ 
 
   // TIPOS DE EXTENSIONES
   var extensionesValidas = ["png", "jpg", "jpeg"];
@@ -22,7 +23,7 @@ const fileFilter = (req, file, cb) => {
   } else{
     cb(null, true);
   }
-
+}
  
 var upload = multer({
   fileFilter,
