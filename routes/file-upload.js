@@ -26,8 +26,10 @@ var id = request.params.id;
 
 
   function subirPorTipo(req, tipo, id, res, nombreArchivo) {
-    console.log(nombreArchivo);
-    console.log(req.file.location);
+    return response.status(201).json({
+
+        'imageUrl': nombreArchivo
+    });
   }
 
   module.exports = app;
