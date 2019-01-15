@@ -17,7 +17,7 @@ var id = req.params.id;
                 }] 
             });
         }
-        subirPorTipo(res);
+        subirPorTipo(res, req);
         // return res.status(201).json({
         //     'imageUrl': req.file.location
         // });
@@ -25,7 +25,7 @@ var id = req.params.id;
   });
 
 
-  function subirPorTipo(res) {
+  function subirPorTipo(res, req) {
     // if (tipo === "usuarios") {
     //   Usuario.findById(id, (err, usuario) => {
     //     if (!usuario) {
