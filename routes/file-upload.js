@@ -4,7 +4,7 @@ const upload = require('../services/file-upload');
 const singleUpload = upload.single('image');
 var Usuario = require("../models/usuario");
 
-app.post("/:tipo/:id", (req, res) => {
+app.post("/:tipo/:id", (req, response) => {
 var tipo = req.params.tipo;
 var id = req.params.id;
  
@@ -17,7 +17,7 @@ var id = req.params.id;
                 }] 
             });
         }
-        subirPorTipo(res, req, tipo, id);
+        subirPorTipo(res, req, tipo, id, response, req.file.location);
         // return res.status(201).json({
         //     'imageUrl': req.file.location
         // });
@@ -25,33 +25,32 @@ var id = req.params.id;
   });
 
 
-  function subirPorTipo(res, req, tipo, id) {
+  function subirPorTipo(res, req, tipo, id, response, nombreArchivo) {
     if (tipo === "usuarios") {
       Usuario.findById(id, (err, usuario) => {
         if (!usuario) {
-          return res.status(400).json({
-            ok: true,
+          return response.status(400).json({
+            ok: false,
             mensaje: "Usuario no existe",
             error: { mensaje: "Usuario no existe" }
           });
         }
-            console.log(usuario);
-        // usuario.imagen = nombreArchivo;
-        // usuario.save((err, usuarioActualizado) => {
-        //   usuarioActualizado.password = ':)';
-        //   return res.status(200).json({
-        //     ok: true,
-        //     mensaje: "Imagen de usuario actualizada",
-        //     imageUrl: req,
-        //     usuario: usuarioActualizado
-        //   });
-        // });
+        usuario.imagen = nombreArchivo;
+        usuario.save((err, usuarioActualizado) => {
+            usuarioActualizado.password = ':)';
+            return response.status(200).json({
+              ok: true,
+              mensaje: "Imagen de usuario actualizada",
+              imageUrl: req,
+              usuario: usuarioActualizado
+            });
+          });
+
+    
       });
     }
 
-      return res.status(201).json({
-             'imageUrl': req.file.location
-         });
+     
 
 
   }
