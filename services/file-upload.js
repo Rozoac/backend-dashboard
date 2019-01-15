@@ -18,17 +18,11 @@ const fileFilter = (req, file, cb) => {
   var extensionesValidas = ["png", "jpg", "jpeg"];
 
   if (extensionesValidas.indexOf(extensionArchivo) < 0) {
-    return res.status(400).json({
-      ok: false,
-      mensaje: "Extension no valida",
-      error: {
-        mensaje: "Las extensiones validas son " + extensionesValidas.join(", ")
-      }
-    });
-  }else{
+    cb(new Error("Las extensiones validas son " + extensionesValidas.join(", ")),false);
+  } else{
     cb(null, true);
   }
-}
+
  
 var upload = multer({
   fileFilter,
