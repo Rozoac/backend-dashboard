@@ -17,37 +17,43 @@ var id = req.params.id;
                 }] 
             });
         }
-        // subirPorTipo(tipo, id, req.file.location, res, req.file.location);
-        return res.status(201).json({
-            'imageUrl': req.file.location
-        });
+        subirPorTipo(res);
+        // return res.status(201).json({
+        //     'imageUrl': req.file.location
+        // });
     });
   });
 
 
-  function subirPorTipo(tipo, id, nombreArchivo, res, req) {
-    if (tipo === "usuarios") {
-      Usuario.findById(id, (err, usuario) => {
-        if (!usuario) {
-          return res.status(400).json({
-            ok: true,
-            mensaje: "Usuario no existe",
-            error: { mensaje: "Usuario no existe" }
-          });
-        }
+  function subirPorTipo(res) {
+    // if (tipo === "usuarios") {
+    //   Usuario.findById(id, (err, usuario) => {
+    //     if (!usuario) {
+    //       return res.status(400).json({
+    //         ok: true,
+    //         mensaje: "Usuario no existe",
+    //         error: { mensaje: "Usuario no existe" }
+    //       });
+    //     }
   
-        usuario.imagen = nombreArchivo;
-        usuario.save((err, usuarioActualizado) => {
-          usuarioActualizado.password = ':)';
-          return res.status(200).json({
-            ok: true,
-            mensaje: "Imagen de usuario actualizada",
-            imageUrl: req,
-            usuario: usuarioActualizado
-          });
-        });
-      });
-    }
+    //     usuario.imagen = nombreArchivo;
+    //     usuario.save((err, usuarioActualizado) => {
+    //       usuarioActualizado.password = ':)';
+    //       return res.status(200).json({
+    //         ok: true,
+    //         mensaje: "Imagen de usuario actualizada",
+    //         imageUrl: req,
+    //         usuario: usuarioActualizado
+    //       });
+    //     });
+    //   });
+    // }
+
+      return res.status(201).json({
+             'imageUrl': req.file.location
+         });
+
+
   }
 
   module.exports = app;
