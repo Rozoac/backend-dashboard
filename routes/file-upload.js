@@ -8,9 +8,9 @@ app.post("/:tipo/:id", (request, response) => {
 var tipo = request.params.tipo;
 var id = request.params.id;
  
-    singleUpload(request, res, (err) =>{
+    singleUpload(request, response, (err) =>{
         if(err){
-            return res.status(422).send({
+            return response.status(422).send({
                 errors: [{
                     title: 'Error al cargar archivo',
                     detail: err.message
@@ -18,7 +18,7 @@ var id = request.params.id;
             });
         }
         // subirPorTipo(req, tipo, id, res, req.file.location);
-        return res.status(201).json({
+        return response.status(201).json({
             'imageUrl': request.file.location
         });
     });
