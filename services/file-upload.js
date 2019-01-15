@@ -13,7 +13,7 @@ const fileFilter = (req, file, cb) => {
   // var archivo = file.mimetype;
   // var nombreCortado = archivo.name.split(".");
   // var extensionArchivo = nombreCortado[nombreCortado.length - 1];
-  console.log(req);
+  console.log(file);
 
   if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
     cb(null, true);
