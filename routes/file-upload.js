@@ -17,7 +17,7 @@ var id = request.params.id;
                 }] 
             });
         }
-        subirPorTipo(request, tipo, id, resPONSE, req.file.location);
+        subirPorTipo(request, tipo, id, response, req.file.location);
         // return response.status(201).json({
         //     'imageUrl': request.file.location
         // });
