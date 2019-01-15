@@ -4,7 +4,7 @@ const upload = require('../services/file-upload');
 const singleUpload = upload.single('image');
 var Usuario = require("../models/usuario");
 
-app.post("/:tipo/:id", (req, res) => {
+app.post("/:tipo/:id", (request, response) => {
 var tipo = req.params.tipo;
 var id = req.params.id;
  
@@ -22,8 +22,6 @@ var id = req.params.id;
             'imageUrl': req.file.location
         });
     });
-
-
   });
 
 
