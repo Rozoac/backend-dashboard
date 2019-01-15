@@ -7,12 +7,13 @@ aws.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   region: 'us-east-2'
 })
-var s3 = new aws.S3()
+let s3 = new aws.S3()
+let extensionArchivo;
 
 const fileFilter = (req, file, cb) => { 
   var archivo = file.originalname;
   var nombreCortado = archivo.split(".");
-  var extensionArchivo = nombreCortado[nombreCortado.length - 1];
+  this.extensionArchivo = nombreCortado[nombreCortado.length - 1];
  
 
   // TIPOS DE EXTENSIONES
