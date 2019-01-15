@@ -17,11 +17,13 @@ var id = req.params.id;
                 }] 
             });
         }
-        subirPorTipo(req, tipo, id, res, req.file.location);
-        // return res.status(201).json({
-        //     'imageUrl': req.file.location
-        // });
+        // subirPorTipo(req, tipo, id, res, req.file.location);
+        return res.status(201).json({
+            'imageUrl': req.file.location
+        });
     });
+
+
   });
 
 
