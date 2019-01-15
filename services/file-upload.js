@@ -14,10 +14,7 @@ const fileFilter = (req, file, cb) => {
   var archivo = file.originalname;
   var nombreCortado = archivo.split(".");
   extensionArchivo = nombreCortado[nombreCortado.length - 1];
-  console.log(extensionArchivo);
-  console.log(archivo);
- 
-
+  
   // TIPOS DE EXTENSIONES
   var extensionesValidas = ["png", "jpg", "jpeg"];
 
@@ -43,4 +40,5 @@ var upload = multer({
     }
   })
 })
+
 module.exports = upload;

@@ -17,12 +17,12 @@ app.put("/:tipo/:id", (req, res, next) => {
   //tipos de colecciom
   var tiposValidos = ["hospitales", "medicos", "usuarios"];
   if (tiposValidos.indexOf(tipo) < 0) {
-    return res.status(400).json({
+    return res.status(400).json                                                               ({
       ok: false,
       mensaje: "Tipo de  no es valida",
       error: {
         mensaje: "seleccione un tipo valido"
-      }7u
+      }
     });
   }
 
@@ -66,7 +66,6 @@ app.put("/:tipo/:id", (req, res, next) => {
         error: err
       });
     }
-
     subirPorTipo(tipo, id, nombreArchivo, res);
   });
 });
