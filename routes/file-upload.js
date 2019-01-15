@@ -4,7 +4,7 @@ const upload = require('../services/file-upload');
 const singleUpload = upload.single('image');
 var Usuario = require("../models/usuario");
 
-app.post("/:tipo/:id", (req, response) => {
+app.post("/:tipo/:id", (req, res) => {
 var tipo = req.params.tipo;
 var id = req.params.id;
  
@@ -17,7 +17,7 @@ var id = req.params.id;
                 }] 
             });
         }
-        subirPorTipo(req, tipo, id, response, req.file.location);
+        subirPorTipo(req, tipo, id, res, req.file.location);
         // return res.status(201).json({
         //     'imageUrl': req.file.location
         // });
@@ -25,11 +25,11 @@ var id = req.params.id;
   });
 
 
-  function subirPorTipo(req, tipo, id, response, nombreArchivo) {
+  function subirPorTipo(req, tipo, id, res, nombreArchivo) {
     if (tipo === "usuarios") {
       Usuario.findById(id, (err, usuario) => {
         if (!usuario) {
-          return response.status(400).json({
+          return res.status(400).json({
             ok: false,
             mensaje: "Usuario no existe",
             error: { mensaje: "Usuario no existe" }
@@ -38,7 +38,7 @@ var id = req.params.id;
         usuario.imagen = nombreArchivo;
         usuario.save((err, usuarioActualizado) => {
             usuarioActualizado.password = ':)';
-            return response.status(200).json({
+            return res.status(200).json({
               ok: true,
               mensaje: "Imagen de usuario actualizada",
               imageUrl: req,
