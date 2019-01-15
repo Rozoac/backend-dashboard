@@ -17,26 +17,17 @@ var id = request.params.id;
                 }] 
             });
         }
-        // subirPorTipo(req, tipo, id, res, req.file.location);
-        return response.status(201).json({
-            'imageUrl': request.file.location
-        });
+        subirPorTipo(request, tipo, id, resPONSE, req.file.location);
+        // return response.status(201).json({
+        //     'imageUrl': request.file.location
+        // });
     });
   });
 
 
   function subirPorTipo(req, tipo, id, res, nombreArchivo) {
-    if (tipo === "usuarios") {
-     
-            return res.status(200).json({
-              ok: true,
-              mensaje: "Imagen de usuario actualizada",
-              imageUrl: req,
-              usuario: usuarioActualizado
-            });
-          };
-
-
+    console.log(nombreArchivo);
+    console.log(req.file.location);
   }
 
   module.exports = app;
