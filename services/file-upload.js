@@ -10,19 +10,25 @@ aws.config.update({
 var s3 = new aws.S3()
 
 const fileFilter = (req, file, cb) => { 
-  // var archivo = file.mimetype;
-  // var nombreCortado = archivo.name.split(".");
-  // var extensionArchivo = nombreCortado[nombreCortado.length - 1];
-  console.log(file);
+  var archivo = file.originalname;
+  var nombreCortado = archivo.split(".");
+  var extensionArchivo = nombreCortado[nombreCortado.length - 1];
 
-  if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+  // TIPOS DE EXTENSIONES
+  var extensionesValidas = ["png", "jpg", "jpeg"];
+
+  if (extensionesValidas.indexOf(extensionArchivo) < 0) {
+    return res.status(400).json({
+      ok: false,
+      mensaje: "Extension no valida",
+      error: {
+        mensaje: "Las extensiones validas son " + extensionesValidas.join(", ")
+      }
+    });
+  }else{
     cb(null, true);
   }
-  else{
-    console.log("etro al else");
-    cb(new Error('Solo imagenes'),false);
-    }
-  }
+}
  
 var upload = multer({
   fileFilter,
