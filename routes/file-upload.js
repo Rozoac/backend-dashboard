@@ -36,10 +36,14 @@ var id = request.params.id;
               error: { mensaje: "Usuario no existe" }
             });
           }
-
-          return res.status(400).json({
-            ok: true,
-            usuario
+          usuario.img = nombreArchivo;
+          usuario.save((err, usuarioActualizado) => {
+            usuarioActualizado.password = ":) .!.";
+            return res.status(200).json({
+              ok: true,
+              mensaje: "Imagen de usuario actualizada",
+              usuario: usuarioActualizado
+            });
           });
 
   
