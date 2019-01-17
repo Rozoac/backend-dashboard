@@ -111,9 +111,7 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
           error: err
         });
       }
-
       // usuarioGuardado.password = "NO SEA SAPO!!!";
-
       res.status(200).json({
         ok: true,
         usuario: usuarioGuardado
