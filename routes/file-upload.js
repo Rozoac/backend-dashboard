@@ -17,15 +17,15 @@ var id = request.params.id;
                 }] 
             });
         }
-        // subirPorTipo(request, tipo, id, response, request.file.location);
-        return response.status(201).json({
-            'imageUrl': request.file.location
-        });
+        subirPorTipo(request, tipo, id, response, request.file.location);
+        // return response.status(201).json({
+        //     'imageUrl': request.file.location
+        // });
     });
   });
 
 
-  function subirPorTipo(tipo, id, res, nombreArchivo) {
+  function subirPorTipo(req, tipo, id, res, nombreArchivo) {
 
     if (tipo === "usuarios") {
         Usuario.findById(id, (err, usuario) => {
