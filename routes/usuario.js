@@ -81,7 +81,7 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
     if (err) {
       return res.status(500).json({
         ok: false,
-        mensaje: "Error al bsucar usuario",
+        mensaje: "Error al buscar usuario",
         error: err
       });
     }
@@ -94,10 +94,13 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
       });
     }
 
-    usuario.nombre = body.nombre;
-    usuario.email = body.email;
-    (usuario.password = bcrypt.hashSync(body.password, 10));
-      (usuario.role = body.role);
+    usuario.nombre = body.nombre | usuario.nombre;
+    usuario.apellido = body.apellido | usuario.apellido;
+    usuario.correo = body.correo | usuario.correo;
+    usuario.celular = body.correo | usuario.celular;
+    usuario.segmento = body.segmento | usuario.segmento;
+    usuario._id_pais = body._id_pais | usuario._id_pais;
+    // (usuario.password = bcrypt.hashSync(body.password, 10));
 
     usuario.save((err, usuarioGuardado) => {
       if (err) {
@@ -108,7 +111,7 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
         });
       }
 
-      usuarioGuardado.password = "NO SEA SAPO!!!";
+      // usuarioGuardado.password = "NO SEA SAPO!!!";
 
       res.status(200).json({
         ok: true,
