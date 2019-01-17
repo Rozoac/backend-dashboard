@@ -98,7 +98,7 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
     usuario.apellido = body.apellido | usuario.apellido;
     usuario.correo = body.correo | usuario.correo;
     usuario.celular = body.correo | usuario.celular;
-    usuario.segmento = body.segmento | usuario.segmento;
+    // usuario.segmento = body.segmento | usuario.segmento;
     usuario._id_pais = body._id_pais | usuario._id_pais;
     // (usuario.password = bcrypt.hashSync(body.password, 10));
 
