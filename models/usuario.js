@@ -17,7 +17,7 @@ var usuarioSchema = new schema({
     clave:  {type: String, required: [true, 'la clave es necesaria']},
     celular: { type: Number, required: [true, 'El celular es obligatorio']},
     imagen: { type: String, required: false},
-    segmento: [{type: ObjectId, ref: 'Segmento', required: [true, 'El segmento es obligatorio']}],
+    segmento: [{type: ObjectId, ref: 'Segmento', required: false,}],
     id_pais: {type: ObjectId, ref: 'Pais', required: [false, 'El pais es obligatorio']},
     fecha_creacion: {type: String, required: false},
     hora_creacion: {type: String, required: false},
