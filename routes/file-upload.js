@@ -25,7 +25,7 @@ var id = request.params.id;
   });
 
 
-  function subirPorTipo(req, tipo, id, res, nombreArchivo) {
+  function subirPorTipo(tipo, id, res, nombreArchivo) {
 
     if (tipo === "usuarios") {
         Usuario.findById(id, (err, usuario) => {
@@ -45,8 +45,6 @@ var id = request.params.id;
               usuario: usuarioActualizado
             });
           });
-
-  
         });
       }
   }
