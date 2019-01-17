@@ -117,7 +117,7 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
         ok: true,
         usuario: usuarioGuardado
       });
-    });
+    }).populate('segmento').populate('id_rol');
   });
 });
 
