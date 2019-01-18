@@ -45,7 +45,7 @@ module.exports = {
             if (err) {
                 console.log('se fue a la mierda todo'+ err);
                 } 
-                return comerciales;
+                console.log(comerciales); 
     });
   }
 
