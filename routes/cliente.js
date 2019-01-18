@@ -98,9 +98,9 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
     usuario.correo = body.correo ;
     usuario.celular = body.celular ;
     usuario.estado = body.estado ;
-    usuario.segmento = body.segmento;
+    usuario.id_segmento = body.id_segmento;
     usuario._id_pais = body._id_pais ;
-    // (usuario.password = bcrypt.hashSync(body.password, 10));
+    usuario.modalidad = body.modalidad ;
 
     usuario.save((err, usuarioGuardado) => {
       if (err) {
