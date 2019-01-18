@@ -12,7 +12,7 @@ var moment = require("moment");
 // =============================
 module.exports = {
    crear:  function(cliente) {
-    console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
+    // console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
 
     asignarComercial(cliente.id_segmento, cliente.id_pais).then((res) =>{
       console.log(res);
