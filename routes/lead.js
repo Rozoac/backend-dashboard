@@ -15,7 +15,7 @@ module.exports = {
     debugger
     // console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
 
-    asignarComercial(cliente.id_segmento, cliente.id_pais).then(resp => console.log(resp));
+    asignarComercial(cliente.id_segmento, cliente.id_pais).then(resolved => console.log(resolved), rejected => console.log(rejected));
 
       var lead = new Lead({
         // id_usuario: cliente._id,
