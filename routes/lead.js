@@ -28,6 +28,7 @@ module.exports = {
         if (err) {
           return false;
         }
+        console.log(comercial);
           return comercial 
       });
     }
