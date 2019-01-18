@@ -35,6 +35,7 @@ module.exports = {
 
 
   function asignarComercial(segmento) {
+    console.log(segmento);
 
     let comerciales;
     Usuario.find({estado: "ACTIVO"}).exec((err, comerciales) => {
@@ -45,7 +46,6 @@ module.exports = {
               error: err
             });
           }
-          console.log(segmento);
     });
   }
 
