@@ -123,7 +123,10 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
 // Crear un cliente nuevo
 // =============================
 app.post("/", (req, res) => {
-   lead.crear(4,6);
+  res.status(200).json({
+    respuessta: lead.crear(4,6)
+  });
+   
 });
 
 // =============================
