@@ -32,9 +32,8 @@ app.use(bodyParser.json());
   var ciudadRoutes = require("./routes/ciudad");
   var segmentoRoutes = require("./routes/segmento");
   var fileUploadRoutes = require("./routes/file-upload");
-  // var busquedaRoutes = require("./routes/busqueda");
-  // var uploadRoutes = require("./routes/upload");
-  // var imagenesRoutes = require("./routes/imagenes");
+  var clienteRoutes = require("./routes/cliente");
+
 
 //rutas
 app.use("/usuario", usuarioRoutes);
@@ -44,7 +43,7 @@ app.use("/segmento", segmentoRoutes);
 app.use("/ciudad", ciudadRoutes);
  app.use("/login", loginRoutes);
  app.use("/fileupload", fileUploadRoutes);
-// app.use("/busqueda", busquedaRoutes);
+app.use("/cliente", clienteRoutes);
 // app.use("/busqueda", busquedaRoutes);
 // app.use("/upload", uploadRoutes);
 // app.use("/img", imagenesRoutes);
