@@ -6,7 +6,7 @@ var mdAutenticacion = require("../middlewares/autenticacion");
 var moment = require("moment");
 
 // =============================
-// OBTENER USIARIO
+// OBTENER CLIENTE
 // =============================
 app.get("/:id", (req, res, next) => {
   var id = req.params.id;
@@ -38,7 +38,7 @@ app.get("/:id", (req, res, next) => {
 });
 
 // =============================
-// OBTENER TODOS LOS USUARIOS
+// OBTENER TODOS LOS CLIENTES
 // =============================
 
 app.get("/", (req, res, next) => {
@@ -46,22 +46,21 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Usuario.find({})
-  .populate('id_rol')
+  Cliente.find({})
   .skip(desde)
   .limit(20)
-  .exec((err, usuarios) => {
+  .exec((err, clientes) => {
     if (err) {
       return res.status(500).json({
         ok: false,
-        mensaje: "Error cargando usuarios",
+        mensaje: "Error cargando clientes",
         error: err
       });
     }
-    Usuario.count({}, (err, conteo) => {
+    Cliente.count({}, (err, conteo) => {
       res.status(200).json({
         ok: true,
-        usuarios: usuarios,
+        clientes,
         total: conteo
       });
     });
