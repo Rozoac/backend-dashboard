@@ -13,7 +13,7 @@ var moment = require("moment");
 module.exports = {
   crear: function(cliente) {
 
-      asignarComercial(cliente.id_segmento.nombre);
+      asignarComercial(cliente.id_segmento);
 
       var lead = new Lead({
         // id_usuario: cliente._id,
@@ -34,11 +34,11 @@ module.exports = {
   }
 
 
-  function asignarComercial(segmento) {
-    console.log(segmento);
+  function asignarComercial(segment) {
+    // console.log(segmento);
 
     let comerciales;
-    Usuario.find({estado: "ACTIVO", segmento: segmento})
+    Usuario.find({estado: "ACTIVO", segmento : { $all : [segment] }})
            .populate('id_segmento')
            .exec((err, comerciales) => {
       if (err) {

@@ -144,7 +144,7 @@ app.post("/", (req, res) => {
     fecha_creacion: moment().format('L'),
     hora_creacion: moment().format('LT')
   });
-  cliente.populate('id_segmento', function(err) {
+  // cliente.populate('id_segmento', function(err) {
     cliente.save((err, clienteGuardado) => {
       if (err) {
         return res.status(400).json({
@@ -157,7 +157,7 @@ app.post("/", (req, res) => {
       console.log(leadRespuesta);
       res.status(201).json({ ok: true, cliente: clienteGuardado});
     })   
-  });
+  // });
 });
 
 // =============================
