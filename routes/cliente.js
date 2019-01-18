@@ -126,26 +126,7 @@ app.post("/", (req, res) => {
   var body = req.body;
 
   var cliente = new Cliente({
-    nombre: body.id_rol,
-    apellido: body.nombre,
-    correo: body.apellido,
-    celular: body.correo,
-    celular_op: body.correo,
-    documento: {
-      tipo_documento: body.documento.tipo_documento,
-      numero: body.documento.numero
-    },
-    tipo_cliente: {
-      tipo: body.tipo_cliente.tipo_documento,
-      nombre: body.tipo_cliente.numero
-    },
-    id_modalidad: body.id_modalidad,
-    id_segmento: body.id_segmento,
-    id_pais: body.id_pais,
-    id_ciudad: body.id_ciudad,
-    mensaje: body.mensaje,
-    id_referido: body.id_referido,
-    fuente: body.fuente,
+
     fecha_creacion: moment().format('L'),
     hora_creacion: moment().format('LT')
   });
