@@ -135,7 +135,7 @@ app.post("/", (req, res) => {
     documento: body.documento,
     tipo_cliente: body.tipo_cliente,
     modalidad: body.modalidad,
-    id_segmento: body.segmento,
+    id_segmento: body.id_segmento,
     id_pais: body.id_pais,
     id_ciudad: body.id_ciudad,
     mensaje: body.mensaje,
