@@ -38,7 +38,7 @@ module.exports = {
     // console.log(segmento);
 
     let comerciales;
-    Usuario.find({estado: "ACTIVO", segmento : { $all : [segment] , id_pais: country } })
+    Usuario.find({estado: "ACTIVO", segmento : {$all : [segment]}, id_pais: country })
            .populate('id_segmento')
            .populate('id_pais')
            .exec((err, comerciales) => {
