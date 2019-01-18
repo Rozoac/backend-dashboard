@@ -1,7 +1,7 @@
 var express = require("express");
 var bcrypt = require("bcryptjs");
 var app = express();
-var jwt = require("jsonwebtoken");
+var Usuario = require("../models/usuario");
 var Lead = require("../models/lead");
 var mdAutenticacion = require("../middlewares/autenticacion");
 var moment = require("moment");
@@ -12,6 +12,9 @@ var moment = require("moment");
 // =============================
 module.exports = {
   crear: function(cliente) {
+
+      asignarComercial(cliente.segmento);
+
       var lead = new Lead({
         // id_usuario: cliente._id,
         id_cliente: cliente._id,
@@ -29,5 +32,23 @@ module.exports = {
       });
     }
   }
+
+
+  function asignarComercial(segmento) {
+
+    let comerciales;
+    Usuario.find({estado = "ACTIVO"}).exec((err, comerciales) => {
+      if (err) {
+            return res.status(500).json({
+              ok: false,
+              mensaje: "Error cargando usuarios",
+              error: err
+            });
+          }
+          console.log(segmento);
+    });
+  }
+
+  
 
 
