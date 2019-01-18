@@ -131,7 +131,8 @@ app.post("/", (req, res) => {
     correo: body.apellido,
     celular: body.correo,
     celular_op: body.correo,
-
+    documento: body.documento,
+    tipo_cliente: body.tipo_cliente,
     id_modalidad: body.id_modalidad,
     id_segmento: body.id_segmento,
     id_pais: body.id_pais,
