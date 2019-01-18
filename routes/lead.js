@@ -14,9 +14,7 @@ module.exports = {
    crear:  function(cliente) {
     // console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
 
-    asignarComercial(cliente.id_segmento, cliente.id_pais).then((res) =>{
-      console.log(res);
-    });
+    asignarComercial(cliente.id_segmento, cliente.id_pais).then(resp => console.log(resp));
 
       var lead = new Lead({
         // id_usuario: cliente._id,
@@ -47,6 +45,7 @@ module.exports = {
             if (err) {
                 console.log('se fue a la mierda todo'+ err);
                 } 
+                console.log(comerciales);
                 return comerciales; 
     });
   }
