@@ -11,7 +11,7 @@ var moment = require("moment");
 // Crear un usuario nuevo
 // =============================
 module.exports = {
-  async crear: function(cliente) {
+   crear: async function(cliente) {
 
    var comercial = asignarComercial(cliente.id_segmento, cliente.id_pais);
 
