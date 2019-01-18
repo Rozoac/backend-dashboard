@@ -12,8 +12,7 @@ var moment = require("moment");
 // =============================
 module.exports = {
    crear:  function(cliente) {
-
-   var comercial = asignarComercial(cliente.id_segmento, cliente.id_pais);
+    console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
 
       var lead = new Lead({
         // id_usuario: cliente._id,
@@ -23,7 +22,6 @@ module.exports = {
         fecha_creacion: moment().format('L'),
         hora_creacion: moment().format('LT')
       });
-      console.log(comercial);
     
        lead.save((err, leadGuardado) => {
         if (err) {
