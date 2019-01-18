@@ -36,16 +36,16 @@ module.exports = {
   }
 
 
-  function asignarComercial(segment, country) {
+  async function asignarComercial(segment, country) {
     // console.log(segmento);
-    Usuario.find({estado: "ACTIVO", segmento : {$all : [segment]}, id_pais: country })
+   await Usuario.find({estado: "ACTIVO", segmento : {$all : [segment]}, id_pais: country })
            .populate('id_segmento')
            .populate('id_pais')
            .exec((err, comerciales) => {
             if (err) {
                 console.log('se fue a la mierda todo'+ err);
                 } 
-                console.log(comerciales); 
+                return comerciales; 
     });
   }
 
