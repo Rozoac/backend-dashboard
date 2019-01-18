@@ -14,9 +14,9 @@ module.exports = {
   crear: function(cliente) {
       var lead = new Lead({
         // id_usuario: cliente._id,
-        // id_cliente: body.nombre,
+        id_cliente: cliente._id,
         // id_semaforo: body.apellido,
-        mensaje: "asd",
+        mensaje: cliente.mensaje,
         fecha_creacion: moment().format('L'),
         hora_creacion: moment().format('LT')
       });
@@ -25,8 +25,8 @@ module.exports = {
         if (err) {
           return false;
         }
-        
-        return leadGuardado });
+          return leadGuardado 
+      });
     }
   }
 
