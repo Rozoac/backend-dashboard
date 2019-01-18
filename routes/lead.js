@@ -14,6 +14,10 @@ module.exports = {
    crear:  function(cliente) {
     console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
 
+    asignarComercial(cliente.id_segmento, cliente.id_pais).then((res) =>{
+      console.log(res);
+    });
+
       var lead = new Lead({
         // id_usuario: cliente._id,
         id_cliente: cliente._id,
