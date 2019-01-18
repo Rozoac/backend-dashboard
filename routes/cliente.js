@@ -126,8 +126,8 @@ app.post("/", (req, res) => {
   var body = req.body;
 
   var cliente = new Cliente({
-    nombre: body.id_rol,
-    apellido: body.nombre,
+    nombre: body.nombre,
+    apellido: body.apellido,
     correo: body.apellido,
     celular: body.correo,
     celular_op: body.correo,
