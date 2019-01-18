@@ -38,7 +38,9 @@ module.exports = {
     console.log(segmento);
 
     let comerciales;
-    Usuario.find({estado: "ACTIVO"}).exec((err, comerciales) => {
+    Usuario.find({estado: "ACTIVO", segmento: segmento})
+           .populate('id_rol')
+           .exec((err, comerciales) => {
       if (err) {
             return res.status(500).json({
               ok: false,
