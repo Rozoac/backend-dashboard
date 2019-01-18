@@ -144,19 +144,20 @@ app.post("/", (req, res) => {
     fecha_creacion: moment().format('L'),
     hora_creacion: moment().format('LT')
   });
-
-  cliente.save((err, clienteGuardado) => {
-    if (err) {
-      return res.status(400).json({
-        ok: false,
-        mensaje: "Error al crear un cliente",
-        error: err
-      });
-    }
-    var leadRespuesta = lead.crear(clienteGuardado)
-    console.log(leadRespuesta);
-    res.status(201).json({ ok: true, cliente: clienteGuardado});
-  }).populate('id_rol')
+  cliente.populate('id_segmento', function(err) {
+    cliente.save((err, clienteGuardado) => {
+      if (err) {
+        return res.status(400).json({
+          ok: false,
+          mensaje: "Error al crear un cliente",
+          error: err
+        });
+      }
+      var leadRespuesta = lead.crear(clienteGuardado)
+      console.log(leadRespuesta);
+      res.status(201).json({ ok: true, cliente: clienteGuardado});
+    })   
+  });
 });
 
 // =============================
