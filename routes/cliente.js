@@ -4,7 +4,7 @@ var app = express();
 var Cliente = require("../models/cliente");
 var mdAutenticacion = require("../middlewares/autenticacion");
 var moment = require("moment");
-var lead = require("lead");
+var lead = require("/lead");
 
 // =============================
 // OBTENER CLIENTE
