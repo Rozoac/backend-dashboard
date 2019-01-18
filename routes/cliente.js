@@ -4,6 +4,7 @@ var app = express();
 var Cliente = require("../models/cliente");
 var mdAutenticacion = require("../middlewares/autenticacion");
 var moment = require("moment");
+var lead = require("lead");
 
 // =============================
 // OBTENER CLIENTE
@@ -122,39 +123,8 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
 // Crear un cliente nuevo
 // =============================
 app.post("/", (req, res) => {
-   
-  var body = req.body;
+   lead.crear(7,8);
 
-  var cliente = new Cliente({
-    nombre: body.nombre,
-    apellido: body.apellido,
-    correo: body.correo,
-    celular: body.celular,
-    celular_op: body.celular_op,
-    documento: body.documento,
-    tipo_cliente: body.tipo_cliente,
-    id_modalidad: body.id_modalidad,
-    segmento: body.segmento,
-    id_pais: body.id_pais,
-    id_ciudad: body.id_ciudad,
-    mensaje: body.mensaje,
-    id_referido: body.id_referido,
-    fuente: body.fuente,
-    fecha_creacion: moment().format('L'),
-    hora_creacion: moment().format('LT')
-  });
-
-  cliente.save((err, clienteGuardado) => {
-    if (err) {
-      return res.status(400).json({
-        ok: false,
-        mensaje: "Error al crear un cliente",
-        error: err
-      });
-    }
-    
-    res.status(201).json({ ok: true, cliente: clienteGuardado });
-  });
 });
 
 // =============================
