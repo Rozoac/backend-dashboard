@@ -2,7 +2,7 @@ var express = require("express");
 var bcrypt = require("bcryptjs");
 var app = express();
 var jwt = require("jsonwebtoken");
-var Usuario = require("../models/usuario");
+var Lead = require("../models/lead");
 var mdAutenticacion = require("../middlewares/autenticacion");
 var moment = require("moment");
 
@@ -11,38 +11,23 @@ var moment = require("moment");
 // Crear un usuario nuevo
 // =============================
 module.exports = {
-  crear: function(a, b) {
-    // app.post("/", (req, res) => {
-       
-    //   var body = req.body;
+  crear: function(cliente) {
+      var lead = new Lead({
+        // id_usuario: cliente._id,
+        // id_cliente: body.nombre,
+        // id_semaforo: body.apellido,
+        mensaje: "asd",
+        fecha_creacion: moment().format('L'),
+        hora_creacion: moment().format('LT')
+      });
     
-    //   var usuario = new Usuario({
-    //     id_rol: body.id_rol,
-    //     nombre: body.nombre,
-    //     apellido: body.apellido,
-    //     correo: body.correo,
-    //     clave: bcrypt.hashSync(body.clave, 10),
-    //     celular: body.celular,
-    //     segmento: body.segmento,
-    //     id_pais: body.id_pais,
-    //     fecha_creacion: moment().format('L'),
-    //     hora_creacion: moment().format('LT')
-    //   });
-    
-    //   usuario.save((err, usuarioGuardado) => {
-    //     if (err) {
-    //       return res.status(400).json({
-    //         ok: false,
-    //         mensaje: "Error al crear un usuario",
-    //         error: err
-    //       });
-    //     }
+      lead.save((err, leadGuardado) => {
+        if (err) {
+          return false;
+        }
         
-    //     res.status(201).json({ ok: true, usuario: usuarioGuardado });
-    //   });
-    // });
-    return a + b;
+        return leadGuardado });
+    }
   }
-}
 
 

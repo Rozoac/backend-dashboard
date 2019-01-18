@@ -8,7 +8,8 @@ var leadSchema = new Schema({
     id_semaforo: { type: Schema.Types.ObjectId, ref: 'Semaforo' },
     mensaje: { type: String, required: false },
     fecha_creacion: {type:String, required: true},
-    update: {type:String, required: true},
+    hora_creacion: {type:String, required: true},
+    update: {type:String, required: false},
 }, {collection: 'leads'});
 
 module.exports = mongoose.model("Lead", leadSchema);
