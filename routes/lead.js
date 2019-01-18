@@ -24,12 +24,12 @@ module.exports = {
         hora_creacion: moment().format('LT')
       });
     
-      await lead.save((err, leadGuardado) => {
+       lead.save((err, leadGuardado) => {
         if (err) {
           return false;
         }
         console.log(comercial);
-          return comercial 
+          return await comercial 
       });
     }
   }
