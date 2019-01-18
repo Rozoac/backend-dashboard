@@ -13,7 +13,7 @@ var moment = require("moment");
 module.exports = {
   crear: function(cliente) {
 
-      asignarComercial(cliente.segmento);
+      asignarComercial(cliente.id_segmento);
 
       var lead = new Lead({
         // id_usuario: cliente._id,
