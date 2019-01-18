@@ -145,8 +145,6 @@ app.post("/", (req, res) => {
     hora_creacion: moment().format('LT')
   });
 
-  
-
   cliente.save((err, clienteGuardado) => {
     if (err) {
       return res.status(400).json({
@@ -157,7 +155,7 @@ app.post("/", (req, res) => {
     }
     var leadRespuesta = lead.crear(clienteGuardado)
     console.log(leadRespuesta);
-    res.status(201).json({ ok: true, cliente: clienteGuardado, lead: leadRespuesta, oh: 'no' });
+    res.status(201).json({ ok: true, cliente: clienteGuardado});
   });
 });
 
