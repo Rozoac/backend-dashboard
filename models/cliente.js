@@ -13,7 +13,7 @@ var clienteSchema = new Schema({
         numero: { type: String }
      },
     tipo_cliente: { 
-        tipo: {type: String, required: true },
+        tipo: {type: String },
         nombre: {type: String, required: false },
      },
     id_modalidad: { type: Schema.Types.ObjectId, ref: 'Modalidad' },
