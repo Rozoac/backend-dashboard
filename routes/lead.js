@@ -29,7 +29,7 @@ module.exports = {
         if (err) {
           return false;
         }
-        console.log(leadGuardado);
+        // console.log(leadGuardado);
           return  leadGuardado 
       });
     }
