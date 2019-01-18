@@ -11,7 +11,7 @@ var moment = require("moment");
 // Crear un usuario nuevo
 // =============================
 module.exports = {
-   crear: async function(cliente) {
+   crear:  function(cliente) {
 
    var comercial = asignarComercial(cliente.id_segmento, cliente.id_pais);
 
@@ -23,8 +23,9 @@ module.exports = {
         fecha_creacion: moment().format('L'),
         hora_creacion: moment().format('LT')
       });
+      console.log(comercial);
     
-      await lead.save((err, leadGuardado) => {
+       lead.save((err, leadGuardado) => {
         if (err) {
           return false;
         }
