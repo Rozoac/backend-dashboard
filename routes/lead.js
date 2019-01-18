@@ -12,7 +12,6 @@ var moment = require("moment");
 // =============================
 module.exports = {
   crear: function(cliente) {
-    console.log(cliente);
 
       asignarComercial(cliente.segmento);
 
@@ -36,6 +35,7 @@ module.exports = {
 
 
   function asignarComercial(segmento) {
+    console.log(segmento);
 
     let comerciales;
     Usuario.find({estado: "ACTIVO"}).exec((err, comerciales) => {
