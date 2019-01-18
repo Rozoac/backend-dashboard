@@ -155,7 +155,7 @@ app.post("/", (req, res) => {
       }
       var leadRespuesta = lead.crear(clienteGuardado)
       console.log(leadRespuesta);
-      res.status(201).json({ ok: true, cliente: clienteGuardado, leadRespuesta});
+      res.status(201).json({ ok: true, cliente: clienteGuardado, leadRespuesta: leadRespuesta});
     })   
   // });
 });
