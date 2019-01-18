@@ -128,9 +128,9 @@ app.post("/", (req, res) => {
   var cliente = new Cliente({
     nombre: body.nombre,
     apellido: body.apellido,
-    correo: body.apellido,
-    celular: body.correo,
-    celular_op: body.correo,
+    correo: body.correo,
+    celular: body.celular,
+    celular_op: body.celular_op,
     documento: body.documento,
     tipo_cliente: body.tipo_cliente,
     id_modalidad: body.id_modalidad,
