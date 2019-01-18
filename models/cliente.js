@@ -17,7 +17,7 @@ var clienteSchema = new Schema({
         nombre: {type: String, required: false },
      },
     modalidad: { type: String, required: false},
-    segmento: { type: Schema.Types.ObjectId, ref: 'Segmento' },
+    id_segmento: { type: Schema.Types.ObjectId, ref: 'Segmento' },
     id_pais: { type: Schema.Types.ObjectId, ref: 'Pais' },
     id_ciudad: { type: Schema.Types.ObjectId, ref: 'Ciudad' },
     mensaje: { type: String, required: false },
