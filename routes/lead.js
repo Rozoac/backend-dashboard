@@ -11,7 +11,8 @@ var moment = require("moment");
 // Crear un usuario nuevo
 // =============================
 module.exports = {
-   crear:  function(cliente) {
+  crear:  function(cliente) {
+    debugger
     // console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
 
     asignarComercial(cliente.id_segmento, cliente.id_pais).then(resp => console.log(resp));
@@ -36,16 +37,16 @@ module.exports = {
   }
 
 
-   function asignarComercial(segment, country) {
+  async function asignarComercial(segment, country) {
     // console.log(segmento);
-    Usuario.find({estado: "ACTIVO", segmento : {$all : [segment]}, id_pais: country })
+   await Usuario.find({estado: "ACTIVO", segmento : {$all : [segment]}, id_pais: country })
            .populate('id_segmento')
            .populate('id_pais')
            .exec((err, comerciales) => {
             if (err) {
                 console.log('se fue a la mierda todo'+ err);
                 } 
-                // console.log(comerciales);
+                console.log(comerciales);
                 return comerciales; 
     });
   }
