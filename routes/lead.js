@@ -42,7 +42,7 @@ module.exports = {
            .populate('id_segmento')
            .exec((err, comerciales) => {
       if (err) {
-      console.log('se putio');
+      console.log('se putio'+ err);
           }
 
           console.log(comerciales);
