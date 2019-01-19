@@ -190,10 +190,10 @@ app.delete("/:id", (req, res) => {
             error: err
           });
         }
-       const respuesta = lead(clienteGuardado)
-       console.log(respuesta);
         res.status(201).json({ ok: true, cliente: clienteGuardado});
       })   
+      const respuesta = lead(clienteGuardado)
+      console.log(respuesta);
     // });
 }
 
