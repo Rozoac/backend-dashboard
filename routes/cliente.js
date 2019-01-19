@@ -195,9 +195,11 @@ app.delete("/:id", (req, res) => {
       //  console.log(respuesta);
         // res.status(201).json({ ok: true, cliente: clienteGuardado});
         respuesta = clienteGuardado;
+        console.log(clienteGuardado + "soloito");
+        console.log(respuesta+ "respuesta dentro");
       });   
     // });
-      console.log(respuesta);
+      console.log(respuesta+ "respuesta afuera");
 }
 
 
