@@ -124,7 +124,7 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
 // =============================
 app.post("/", (req, res) => {
 
- console.log(guardarCliente(req, res)); 
+ console.log(guardarCliente(req, res).then(res => console.log(res))); 
 });
 
 // =============================
