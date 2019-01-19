@@ -197,7 +197,7 @@ app.delete("/:id", (req, res) => {
     // });
 }
 
-  async function lead (cliente) {
+   function lead (cliente) {
 
   // asignarComercial(cliente.id_segmento, cliente.id_pais).then(resolve => console.log(resolve + "2"));
     var lead = new Lead({
@@ -209,13 +209,14 @@ app.delete("/:id", (req, res) => {
       hora_creacion: moment().format('LT')
     });
   
-     lead.save((err, leadGuardado) => {
+     lead.save().exec( (err, leadGuardado) => { 
+        
       if (err) {
         return false;
       }
       // console.log(leadGuardado);
         return  leadGuardado 
-    }).exec();
+    })
   }
 
 module.exports = app;
