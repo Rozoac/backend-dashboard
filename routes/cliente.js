@@ -160,7 +160,7 @@ app.delete("/:id", (req, res) => {
 
 
 
-async function guardarCliente(req, res){
+ function guardarCliente(req, res){
   var body = req.body;
   var cliente = new Cliente({
     nombre: body.nombre,
@@ -182,7 +182,7 @@ async function guardarCliente(req, res){
   });
   
     // cliente.populate('id_segmento', function(err) {
-    await cliente.save((err, clienteGuardado) => {
+     cliente.save((err, clienteGuardado) => {
         if (err) {
           return res.status(400).json({
             ok: false,
@@ -191,7 +191,7 @@ async function guardarCliente(req, res){
           });
         }
         lead.crear(clienteGuardado).then(resolve => console.log(resolve + "1" ));
-        res.status(201).json({ ok: true, cliente: clienteGuardado});
+        // res.status(201).json({ ok: true, cliente: clienteGuardado});
       })   
     // });
 }
