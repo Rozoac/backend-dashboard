@@ -11,11 +11,9 @@ var moment = require("moment");
 // Crear un usuario nuevo
 // =============================
 module.exports = {
-  crear:   async function(cliente) {
-    // console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
+  crear:  function(cliente) {
 
-    
-   await asignarComercial(cliente.id_segmento, cliente.id_pais).then(resolve => console.log(resolve + "2"));
+    asignarComercial(cliente.id_segmento, cliente.id_pais).then(resolve => console.log(resolve + "2"));
       var lead = new Lead({
         // id_usuario: cliente._id,
         id_cliente: cliente._id,
@@ -25,7 +23,7 @@ module.exports = {
         hora_creacion: moment().format('LT')
       });
     
-      await lead.save((err, leadGuardado) => {
+       lead.save((err, leadGuardado) => {
         if (err) {
           return false;
         }
@@ -36,9 +34,9 @@ module.exports = {
   }
 
 
-  async function asignarComercial(segment, country) {
+   function asignarComercial(segment, country) {
     // console.log(segmento);
-    await Usuario.find({estado: "ACTIVO", segmento : {$all : [segment]}, id_pais: country })
+     Usuario.find({estado: "ACTIVO", segmento : {$all : [segment]}, id_pais: country })
            .populate('id_segmento')
            .populate('id_pais')
            .exec((err, comerciales) => {
