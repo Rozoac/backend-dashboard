@@ -124,7 +124,7 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
 // =============================
 app.post("/", (req, res) => {
 
-  guardarCliente(req, res);
+ console.log(guardarCliente(req, res)); 
 });
 
 // =============================
@@ -193,7 +193,7 @@ app.delete("/:id", (req, res) => {
       //  const respuesta = await lead.crear(clienteGuardado)
       //  console.log(respuesta);
         // res.status(201).json({ ok: true, cliente: clienteGuardado});
-        console.log(clienteGuardado);
+        return clienteGuardado;
       });   
     // });
 }
