@@ -190,8 +190,8 @@ async function guardarCliente(req, res){
             error: err
           });
         }
-        await lead.crear(clienteGuardado)
-        // console.log(leadRespuesta);
+        leadRespuesta = await lead.crear(clienteGuardado)
+        console.log(leadRespuesta);
         res.status(201).json({ ok: true, cliente: clienteGuardado});
       })   
     // });
