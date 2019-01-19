@@ -191,7 +191,7 @@ async function guardarCliente(req, res){
           });
         }
         leadRespuesta =  lead.crear(clienteGuardado).then(resolve => console.log(resolve));
-        console.log(leadRespuesta);
+        console.log(leadRespuesta + leadRespuesta);
         res.status(201).json({ ok: true, cliente: clienteGuardado});
       })   
     // });
