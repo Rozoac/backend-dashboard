@@ -47,7 +47,7 @@ module.exports = {
 // Asignar un comercial
 // ============================================
   async function asignarComercial(segment, country, callback) {
-   await Usuario.find({ segmento : {$all : [segment]}, id_pais: country })
+   await Usuario.find({ segmento : {$all : [segment]}, id_pais: country }),'nombre apellido correo '
            .populate('id_segmento')
            .populate('id_pais')
            .exec((err, comerciales) => {
