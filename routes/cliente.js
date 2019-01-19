@@ -123,36 +123,29 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
 // Crear un cliente nuevo
 // =============================
 app.post("/", (req, res) => {
-  asd();
-async function asd(){
-  var hola = await guardarCliente(); 
-  console.log(hola);
-}
+   
+  var body = req.body;
 
-async function guardarCliente(){
-  var respuesta;
-var body = req.body;
-var cliente = new Cliente({
-  nombre: body.nombre,
-  apellido: body.apellido,
-  correo: body.correo,
-  celular: body.celular,
-  celular_op: body.celular_op,
-  documento: body.documento,
-  tipo_cliente: body.tipo_cliente,
-  modalidad: body.modalidad,
-  id_segmento: body.id_segmento,
-  id_pais: body.id_pais,
-  id_ciudad: body.id_ciudad,
-  mensaje: body.mensaje,
-  id_referido: body.id_referido,
-  fuente: body.fuente,
-  fecha_creacion: moment().format('L'),
-  hora_creacion: moment().format('LT')
-});
-
-  // cliente.populate('id_segmento', function(err) {
-    await cliente.save((err, clienteGuardado) => {
+  var cliente = new Cliente({
+    nombre: body.nombre,
+    apellido: body.apellido,
+    correo: body.correo,
+    celular: body.celular,
+    celular_op: body.celular_op,
+    documento: body.documento,
+    tipo_cliente: body.tipo_cliente,
+    modalidad: body.modalidad,
+    id_segmento: body.id_segmento,
+    id_pais: body.id_pais,
+    id_ciudad: body.id_ciudad,
+    mensaje: body.mensaje,
+    id_referido: body.id_referido,
+    fuente: body.fuente,
+    fecha_creacion: moment().format('L'),
+    hora_creacion: moment().format('LT')
+  });
+  cliente.populate('id_segmento', function(err) {
+    cliente.save((err, clienteGuardado) => {
       if (err) {
         return res.status(400).json({
           ok: false,
@@ -160,15 +153,17 @@ var cliente = new Cliente({
           error: err
         });
       }
-    //  const respuesta = await lead.crear(clienteGuardado)
-    //  console.log(respuesta);
-      // res.status(201).json({ ok: true, cliente: clienteGuardado});
-      respuesta = clienteGuardado;
-      console.log(respuesta+ "respuesta dentro");
-      return respuesta;
-    });   
-  // });
-}
+      lead.crear(clienteGuardado, function(err, lead) {
+        res.status(201).json({ 
+          ok: true, 
+          lead: lead,
+          cliente: clienteGuardado
+        });
+        // console.log(user);
+      })
+     
+    })   
+  });
 });
 
 // =============================
@@ -201,10 +196,5 @@ app.delete("/:id", (req, res) => {
     });
   });
 });
-
-
-
-
-
 
 module.exports = app;

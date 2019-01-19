@@ -11,40 +11,44 @@ var moment = require("moment");
 // Crear un usuario nuevo
 // =============================
 module.exports = {
-  crear: new Promise(function(cliente) {
-
-    // asignarComercial(cliente.id_segmento, cliente.id_pais).then(resolve => console.log(resolve + "2"));
-      var lead = new Lead({
-        // id_usuario: cliente._id,
-        id_cliente: cliente._id,
-        // id_semaforo: body.apellido,
-        mensaje: cliente.mensaje,
-        fecha_creacion: moment().format('L'),
-        hora_creacion: moment().format('LT')
-      });
+   crear:  function(cliente, callback) {
     
-       lead.save((err, leadGuardado) => {
-        if (err) {
-          return false;
-        }
-        // console.log(leadGuardado);
-          return  leadGuardado 
-      });
-    }) 
+  asignarComercial(cliente.id_segmento, cliente.id_pais, function(err, user) {
+    const comercial = getRandomString(user);
+    var lead = new Lead({
+      id_usuario: comercial._id,
+      id_cliente: cliente._id,
+      // id_semaforo: body.apellido,
+      mensaje: cliente.mensaje,
+      fecha_creacion: moment().format('L'),
+      hora_creacion: moment().format('LT')
+    });
+    lead.save((err, leadGuardado) => {
+      if (err) {
+        return false;
+      }
+      return callback(null, leadGuardado)
+    });
+    
+  })
+    }
+  }
+
+  function getRandomString(array){
+    return array[Math.floor(Math.random()*array.length)]
   }
 
 
-   function asignarComercial(segment, country) {
+  async function asignarComercial(segment, country, callback) {
     // console.log(segmento);
-     Usuario.find({estado: "ACTIVO", segmento : {$all : [segment]}, id_pais: country })
+   await Usuario.find({ segmento : {$all : [segment]}, id_pais: country })
            .populate('id_segmento')
            .populate('id_pais')
            .exec((err, comerciales) => {
             if (err) {
                 console.log('se fue a la mierda todo'+ err);
                 } 
-                // console.log(comerciales);
-                return comerciales; 
+               return callback(null, comerciales)
     });
   }
 
