@@ -190,14 +190,14 @@ app.delete("/:id", (req, res) => {
             error: err
           });
         }
-       const respuesta = await lead(clienteGuardado)
+       const respuesta = lead(clienteGuardado)
        console.log(respuesta);
         res.status(201).json({ ok: true, cliente: clienteGuardado});
       })   
     // });
 }
 
-   function lead (cliente) {
+  function lead (cliente) {
 
   // asignarComercial(cliente.id_segmento, cliente.id_pais).then(resolve => console.log(resolve + "2"));
     var lead = new Lead({
@@ -209,14 +209,13 @@ app.delete("/:id", (req, res) => {
       hora_creacion: moment().format('LT')
     });
   
-     lead.save().exec( (err, leadGuardado) => { 
-        
+     lead.save((err, leadGuardado) => {
       if (err) {
         return false;
       }
       // console.log(leadGuardado);
         return  leadGuardado 
-    })
+    });
   }
 
 module.exports = app;
