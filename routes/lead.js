@@ -14,7 +14,8 @@ module.exports = {
   crear:  async function(cliente) {
     // console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
 
-    asignarComercial(cliente.id_segmento, cliente.id_pais).then(resolved => console.log(resolved), rejected => console.log(rejected));
+    console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
+     
 
       var lead = new Lead({
         // id_usuario: cliente._id,
