@@ -182,7 +182,7 @@ app.delete("/:id", (req, res) => {
   });
   
     // cliente.populate('id_segmento', function(err) {
-     cliente.save((err, clienteGuardado) => {
+     await cliente.save((err, clienteGuardado) => {
         if (err) {
           return res.status(400).json({
             ok: false,
