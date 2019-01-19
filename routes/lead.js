@@ -11,7 +11,7 @@ var moment = require("moment");
 // Crear un usuario nuevo
 // =============================
 module.exports = {
-  crear:  function(cliente) {
+  crear: new Promise(function(cliente) {
 
     // asignarComercial(cliente.id_segmento, cliente.id_pais).then(resolve => console.log(resolve + "2"));
       var lead = new Lead({
@@ -30,7 +30,7 @@ module.exports = {
         // console.log(leadGuardado);
           return  leadGuardado 
       });
-    }
+    }) 
   }
 
 
