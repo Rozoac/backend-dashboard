@@ -4,7 +4,7 @@ var app = express();
 var Cliente = require("../models/cliente");
 var mdAutenticacion = require("../middlewares/autenticacion");
 var moment = require("moment");
-var Lead = require("../models/lead");
+var lead = require("./lead");
 
 // =============================
 // OBTENER CLIENTE
@@ -161,9 +161,8 @@ app.delete("/:id", (req, res) => {
 
 
   async function guardarCliente(req, res){
-    let cliente;
   var body = req.body;
-  var clientesin = new Cliente({
+  var cliente = new Cliente({
     nombre: body.nombre,
     apellido: body.apellido,
     correo: body.correo,
@@ -184,7 +183,6 @@ app.delete("/:id", (req, res) => {
   
     // cliente.populate('id_segmento', function(err) {
      cliente.save((err, clienteGuardado) => {
-      this.clientesin = clienteGuardado;
         if (err) {
           return res.status(400).json({
             ok: false,
@@ -192,32 +190,13 @@ app.delete("/:id", (req, res) => {
             error: err
           });
         }
-        res.status(201).json({ ok: true, cliente: clienteGuardado});
-      });
-      const respuesta = lead(this.clientesin)
-      console.log(respuesta);
+      //  const respuesta = await lead.crear(clienteGuardado)
+      //  console.log(respuesta);
+        // res.status(201).json({ ok: true, cliente: clienteGuardado});
+        console.log(clienteGuardado);
+      });   
     // });
 }
 
-  function lead (cliente) {
-
-  // asignarComercial(cliente.id_segmento, cliente.id_pais).then(resolve => console.log(resolve + "2"));
-    var lead = new Lead({
-      // id_usuario: cliente._id,
-      id_cliente: cliente._id,
-      // id_semaforo: body.apellido,
-      mensaje: cliente.mensaje,
-      fecha_creacion: moment().format('L'),
-      hora_creacion: moment().format('LT')
-    });
-  
-     lead.save((err, leadGuardado) => {
-      if (err) {
-        return false;
-      }
-      // console.log(leadGuardado);
-        return  leadGuardado 
-    });
-  }
 
 module.exports = app;
