@@ -12,7 +12,6 @@ var moment = require("moment");
 // =============================
 module.exports = {
   crear:  async function(cliente) {
-    debugger
     // console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
 
     asignarComercial(cliente.id_segmento, cliente.id_pais).then(resolved => console.log(resolved), rejected => console.log(rejected));
