@@ -15,7 +15,7 @@ module.exports = {
     // console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
 
     
-   await asignarComercial(cliente.id_segmento, cliente.id_pais).then(resolve => console.log(resolve));
+   await asignarComercial(cliente.id_segmento, cliente.id_pais).then(resolve => console.log(resolve + "2"));
       var lead = new Lead({
         // id_usuario: cliente._id,
         id_cliente: cliente._id,
