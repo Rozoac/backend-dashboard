@@ -22,6 +22,7 @@ module.exports = {
         fecha_creacion: moment().format('L'),
         hora_creacion: moment().format('LT')
       });
+      lead.populate('id_usuario', function(err) {
       lead.populate('id_cliente', function(err) {
       lead.save((err, leadGuardado) => {
         if (err) {
@@ -29,6 +30,7 @@ module.exports = {
         }
         console.log(leadGuardado);
         return callback(null, leadGuardado)
+      });
       });
       });
     })
