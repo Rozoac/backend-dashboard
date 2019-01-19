@@ -22,11 +22,12 @@ module.exports = {
         fecha_creacion: moment().format('L'),
         hora_creacion: moment().format('LT')
       });
-      cliente.populate('id_usuario', function(err) {
+      cliente.populate('id_cliente', function(err) {
       lead.save((err, leadGuardado) => {
         if (err) {
           return false;
         }
+        console.log(leadGuardado);
         return callback(null, leadGuardado)
       });
       });
