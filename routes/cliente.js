@@ -196,6 +196,7 @@ app.delete("/:id", (req, res) => {
         // res.status(201).json({ ok: true, cliente: clienteGuardado});
         respuesta = clienteGuardado;
         console.log(respuesta+ "respuesta dentro");
+        return respuesta;
       });   
     // });
 }
