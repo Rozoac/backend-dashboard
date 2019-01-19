@@ -182,7 +182,7 @@ async function guardarCliente(req, res){
   });
   
     // cliente.populate('id_segmento', function(err) {
-      cliente.save((err, clienteGuardado) => {
+    await cliente.save((err, clienteGuardado) => {
         if (err) {
           return res.status(400).json({
             ok: false,
@@ -190,7 +190,7 @@ async function guardarCliente(req, res){
             error: err
           });
         }
-        leadRespuesta = await lead.crear(clienteGuardado)
+        leadRespuesta =  lead.crear(clienteGuardado)
         console.log(leadRespuesta);
         res.status(201).json({ ok: true, cliente: clienteGuardado});
       })   
