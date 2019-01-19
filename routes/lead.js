@@ -14,8 +14,8 @@ module.exports = {
   crear:  async function(cliente) {
     // console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
 
-    console.log(asignarComercial(cliente.id_segmento, cliente.id_pais));
-     
+    
+    await asignarComercial(cliente.id_segmento, cliente.id_pais)
 
       var lead = new Lead({
         // id_usuario: cliente._id,
@@ -39,7 +39,7 @@ module.exports = {
 
   async function asignarComercial(segment, country) {
     // console.log(segmento);
-    Usuario.find({estado: "ACTIVO", segmento : {$all : [segment]}, id_pais: country })
+    await Usuario.find({estado: "ACTIVO", segmento : {$all : [segment]}, id_pais: country })
            .populate('id_segmento')
            .populate('id_pais')
            .exec((err, comerciales) => {
