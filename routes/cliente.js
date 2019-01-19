@@ -4,7 +4,7 @@ var app = express();
 var Cliente = require("../models/cliente");
 var mdAutenticacion = require("../middlewares/autenticacion");
 var moment = require("moment");
-var lead = require("./lead");
+var Lead = require("./lead");
 
 // =============================
 // OBTENER CLIENTE
@@ -190,11 +190,32 @@ app.delete("/:id", (req, res) => {
             error: err
           });
         }
-       const respuesta = await lead.crear(clienteGuardado)
+       const respuesta = await lead(clienteGuardado)
        console.log(respuesta);
         res.status(201).json({ ok: true, cliente: clienteGuardado});
       })   
     // });
 }
+
+  async function lead (cliente) {
+
+  // asignarComercial(cliente.id_segmento, cliente.id_pais).then(resolve => console.log(resolve + "2"));
+    var lead = new Lead({
+      // id_usuario: cliente._id,
+      id_cliente: cliente._id,
+      // id_semaforo: body.apellido,
+      mensaje: cliente.mensaje,
+      fecha_creacion: moment().format('L'),
+      hora_creacion: moment().format('LT')
+    });
+  
+     lead.save((err, leadGuardado) => {
+      if (err) {
+        return false;
+      }
+      // console.log(leadGuardado);
+        return  leadGuardado 
+    });
+  }
 
 module.exports = app;
