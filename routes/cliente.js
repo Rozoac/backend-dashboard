@@ -123,9 +123,11 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
 // Crear un cliente nuevo
 // =============================
 app.post("/", (req, res) => {
-
- var hola = await guardarCliente(req, res); 
- console.log(hola);
+  asd();
+async function asd(){
+  var hola = await guardarCliente(req, res); 
+  console.log(hola);
+}
 });
 
 // =============================
