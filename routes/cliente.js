@@ -157,7 +157,6 @@ app.post("/", (req, res) => {
         res.status(201).json({ 
           ok: true, 
           lead: lead,
-          cliente: clienteGuardado
         });
         // console.log(user);
       })

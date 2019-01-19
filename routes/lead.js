@@ -8,39 +8,42 @@ var moment = require("moment");
 
 
 // =============================
-// Crear un usuario nuevo
+// Crear un lead nuevo
 // =============================
 module.exports = {
    crear:  function(cliente, callback) {
-    
-  asignarComercial(cliente.id_segmento, cliente.id_pais, function(err, user) {
-    const comercial = getRandomString(user);
-    var lead = new Lead({
-      id_usuario: comercial._id,
-      id_cliente: cliente._id,
-      // id_semaforo: body.apellido,
-      mensaje: cliente.mensaje,
-      fecha_creacion: moment().format('L'),
-      hora_creacion: moment().format('LT')
-    });
-    lead.save((err, leadGuardado) => {
-      if (err) {
-        return false;
-      }
-      return callback(null, leadGuardado)
-    });
-    
-  })
-    }
+    asignarComercial(cliente.id_segmento, cliente.id_pais, function(err, user) {
+      const comercial = getRandomString(user);
+      var lead = new Lead({
+        id_usuario: comercial._id,
+        id_cliente: cliente._id,
+        // id_semaforo: body.apellido,
+        mensaje: cliente.mensaje,
+        fecha_creacion: moment().format('L'),
+        hora_creacion: moment().format('LT')
+      });
+      cliente.populate('id_usuario', function(err) {
+      lead.save((err, leadGuardado) => {
+        if (err) {
+          return false;
+        }
+        return callback(null, leadGuardado)
+      });
+      });
+    })
   }
-
+}
+// ============================================
+// Sacar una posicion del arreglo aleatoriamente
+// ============================================
   function getRandomString(array){
     return array[Math.floor(Math.random()*array.length)]
   }
 
-
+// ============================================
+// Asignar un comercial
+// ============================================
   async function asignarComercial(segment, country, callback) {
-    // console.log(segmento);
    await Usuario.find({ segmento : {$all : [segment]}, id_pais: country })
            .populate('id_segmento')
            .populate('id_pais')
