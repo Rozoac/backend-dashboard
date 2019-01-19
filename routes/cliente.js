@@ -123,41 +123,8 @@ app.put("/:id", mdAutenticacion.verificaToken, (req, res) => {
 // Crear un cliente nuevo
 // =============================
 app.post("/", (req, res) => {
-   
-  var body = req.body;
 
-  var cliente = new Cliente({
-    nombre: body.nombre,
-    apellido: body.apellido,
-    correo: body.correo,
-    celular: body.celular,
-    celular_op: body.celular_op,
-    documento: body.documento,
-    tipo_cliente: body.tipo_cliente,
-    modalidad: body.modalidad,
-    id_segmento: body.id_segmento,
-    id_pais: body.id_pais,
-    id_ciudad: body.id_ciudad,
-    mensaje: body.mensaje,
-    id_referido: body.id_referido,
-    fuente: body.fuente,
-    fecha_creacion: moment().format('L'),
-    hora_creacion: moment().format('LT')
-  });
-  // cliente.populate('id_segmento', function(err) {
-    cliente.save((err, clienteGuardado) => {
-      if (err) {
-        return res.status(400).json({
-          ok: false,
-          mensaje: "Error al crear un cliente",
-          error: err
-        });
-      }
-      lead.crear(clienteGuardado).then(resolve => console.log(resolve))
-      // console.log(leadRespuesta);
-      res.status(201).json({ ok: true, cliente: clienteGuardado});
-    })   
-  // });
+  guardarCliente(req, res);
 });
 
 // =============================
@@ -190,5 +157,44 @@ app.delete("/:id", (req, res) => {
     });
   });
 });
+
+
+
+async function guardarCliente(req, res){
+  var body = req.body;
+  var cliente = new Cliente({
+    nombre: body.nombre,
+    apellido: body.apellido,
+    correo: body.correo,
+    celular: body.celular,
+    celular_op: body.celular_op,
+    documento: body.documento,
+    tipo_cliente: body.tipo_cliente,
+    modalidad: body.modalidad,
+    id_segmento: body.id_segmento,
+    id_pais: body.id_pais,
+    id_ciudad: body.id_ciudad,
+    mensaje: body.mensaje,
+    id_referido: body.id_referido,
+    fuente: body.fuente,
+    fecha_creacion: moment().format('L'),
+    hora_creacion: moment().format('LT')
+  });
+  
+    // cliente.populate('id_segmento', function(err) {
+      cliente.save((err, clienteGuardado) => {
+        if (err) {
+          return res.status(400).json({
+            ok: false,
+            mensaje: "Error al crear un cliente",
+            error: err
+          });
+        }
+        await lead.crear(clienteGuardado).then(resolve => console.log(resolve))
+        // console.log(leadRespuesta);
+        res.status(201).json({ ok: true, cliente: clienteGuardado});
+      })   
+    // });
+}
 
 module.exports = app;
