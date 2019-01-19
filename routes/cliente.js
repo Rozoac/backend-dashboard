@@ -215,7 +215,7 @@ app.delete("/:id", (req, res) => {
       }
       // console.log(leadGuardado);
         return  leadGuardado 
-    });
+    }).exec();
   }
 
 module.exports = app;
