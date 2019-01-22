@@ -9,12 +9,12 @@ var app = express();
 // OBTENER LEAD POR ID
 // =============================
 
-app.get("/", (req, res, next) => {
+app.get("/:id", (req, res, next) => {
   var id = req.params.id;
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Lead.find({})
+  Lead.find({'id_usuario': id})
   .populate('id_cliente')
   .skip(desde)
   .limit(10)
