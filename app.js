@@ -5,6 +5,8 @@ require("./config/config");
 var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
+const server = require('http').createServer(express);
+const io = require('socket.io')(server);
 var app = express();
 
 /*=================================================
@@ -62,6 +64,6 @@ mongoose.connect(
 );
 
 // SERVIDOR
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
   console.log(`ESCUCHANDO EN EL PUERTO ${process.env.PORT}`);
 });
