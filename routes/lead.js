@@ -1,5 +1,7 @@
+var express = require("express");
 var Usuario = require("../models/usuario");
 var Lead = require("../models/lead");
+var app = express();
 
 
 
@@ -33,4 +35,4 @@ app.get("/", (req, res, next) => {
   });
 });
 
-  
+module.exports = app;  
