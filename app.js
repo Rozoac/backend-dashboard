@@ -33,6 +33,7 @@ app.use(bodyParser.json());
   var segmentoRoutes = require("./routes/segmento");
   var fileUploadRoutes = require("./routes/file-upload");
   var clienteRoutes = require("./routes/cliente");
+  var leadRoutes = require("./routes/lead");
 
 
 //rutas
@@ -44,7 +45,7 @@ app.use("/ciudad", ciudadRoutes);
  app.use("/login", loginRoutes);
  app.use("/fileupload", fileUploadRoutes);
 app.use("/cliente", clienteRoutes);
-// app.use("/busqueda", busquedaRoutes);
+app.use("/lead", leadRoutes);
 // app.use("/upload", uploadRoutes);
 // app.use("/img", imagenesRoutes);
 
