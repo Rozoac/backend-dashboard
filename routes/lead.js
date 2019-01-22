@@ -14,14 +14,14 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Cliente.find({'id_usuario':ObjectId(id)})
+  Lead.find({'id_usuario':ObjectId(id)})
   .skip(desde)
   .limit(20)
   .exec((err, clientes) => {
     if (err) {
       return res.status(500).json({
         ok: false,
-        mensaje: "Error cargando clientes",
+        mensaje: "Error cargando leads",
         error: err
       });
     }
