@@ -15,7 +15,15 @@ app.get("/:id", (req, res, next) => {
   desde = Number(desde);
 
   Lead.find({'id_usuario': id})
-  .populate('id_cliente')
+  .populate({
+    path: "id_cliente",
+    // select: 'url fecha text route_image menu slide',
+    populate: {
+      path: 'id_segmento',
+      model: 'Segmento'
+      // select: 'autenticacion direccion'
+    }
+  })
   .skip(desde)
   .limit(10)
   .exec((err, leads) => {
