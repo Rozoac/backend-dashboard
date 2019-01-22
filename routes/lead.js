@@ -14,7 +14,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Lead.find({'id_usuario': id})
+  Lead.find({})
   .skip(desde)
   .limit(20)
   .exec((err, leads) => {
