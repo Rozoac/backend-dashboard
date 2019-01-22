@@ -6,9 +6,9 @@ var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var cors = require("cors");
-const server = require('http').createServer(express);
-const io = require('socket.io')(server);
 var app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 /*=================================================
                     CORS
