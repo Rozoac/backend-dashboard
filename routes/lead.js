@@ -24,6 +24,15 @@ app.get("/:id", (req, res, next) => {
       // select: 'autenticacion direccion'
     }
   })
+  .populate({
+    path: "id_cliente",
+    // select: 'url fecha text route_image menu slide',
+    populate: {
+      path: 'id_ciudad',
+      model: 'Ciudad'
+      // select: 'autenticacion direccion'
+    }
+  })
   .skip(desde)
   .limit(10)
   .exec((err, leads) => {
