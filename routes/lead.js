@@ -26,7 +26,7 @@ app.get("/:id", (req, res, next) => {
         error: err
       });
     }
-    Lead.count({}, (err, conteo) => {
+    Lead.count({'id_usuario': id}, (err, conteo) => {
       res.status(200).json({
         ok: true,
         leads,
