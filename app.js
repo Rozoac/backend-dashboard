@@ -35,7 +35,6 @@ app.use(bodyParser.json());
   var clienteRoutes = require("./routes/cliente");
   var leadRoutes = require("./routes/lead");
 
-
 //rutas
 app.use("/usuario", usuarioRoutes);
 app.use("/rol", rolRoutes);
