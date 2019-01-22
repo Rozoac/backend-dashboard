@@ -15,8 +15,9 @@ app.get("/", (req, res, next) => {
   desde = Number(desde);
 
   Lead.find({})
+  .populate(id_cliente)
   .skip(desde)
-  .limit(20)
+  .limit(10)
   .exec((err, leads) => {
     if (err) {
       return res.status(500).json({
