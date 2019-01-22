@@ -17,7 +17,7 @@ app.get("/", (req, res, next) => {
   Lead.find({'id_usuario':ObjectId(id)})
   .skip(desde)
   .limit(20)
-  .exec((err, clientes) => {
+  .exec((err, leads) => {
     if (err) {
       return res.status(500).json({
         ok: false,
@@ -25,10 +25,10 @@ app.get("/", (req, res, next) => {
         error: err
       });
     }
-    Cliente.count({}, (err, conteo) => {
+    Lead.count({}, (err, conteo) => {
       res.status(200).json({
         ok: true,
-        clientes,
+        leads,
         total: conteo
       });
     });
