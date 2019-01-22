@@ -29,7 +29,7 @@ app.get("/:id", (req, res, next) => {
     // select: 'url fecha text route_image menu slide',
     populate: {
       path: 'id_ciudad',
-      model: 'Ciudad'
+      model: 'ciudad'
       // select: 'autenticacion direccion'
     }
   })
