@@ -7,6 +7,37 @@ var mdAutenticacion = require("../middlewares/autenticacion");
 var moment = require("moment");
 
 
+
+// =================================
+// Obtener leads de comercial por id
+// =================================
+app.get("/", (req, res, next) => {
+
+  var id = req.params.id;
+  var desde = req.query.desde || 0;
+  desde = Number(desde);
+
+  Lead.find({'id_usuario':ObjectId(id)})
+  .skip(desde)
+  .limit(20)
+  .exec((err, clientes) => {
+    if (err) {
+      return res.status(500).json({
+        ok: false,
+        mensaje: "Error cargando leads",
+        error: err
+      });
+    }
+    Usuario.count({}, (err, conteo) => {
+      res.status(200).json({
+        ok: true,
+        clientes,
+        total: conteo
+      });
+    });
+  });
+});
+
 // =============================
 // Crear un lead nuevo
 // =============================
