@@ -2,6 +2,11 @@ var Usuario = require("../models/usuario");
 var Lead = require("../models/lead");
 var moment = require("moment");
 
+var express = require("express");
+var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 
 
 // =============================
@@ -25,6 +30,9 @@ module.exports = {
         if (err) {
           return false;
         }
+        io.emit('respuesta-leads', {
+          leadGuardado,
+      })
         return callback(null, leadGuardado)
       });
       });

@@ -9,6 +9,7 @@ var cors = require("cors");
 var app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
+var sockets = require('./sockets/socket');
 
 /*=================================================
                     CORS
@@ -27,6 +28,9 @@ const io = require('socket.io')(server);
 app.use(bodyParser.urlencoded({ expented: false }));
 app.use(bodyParser.json());
 app.use(cors({origin:true, credentials:true}));
+
+escucharSockets();
+
 
 //Importar rutas
   var appRoutes = require("./routes/app");
@@ -66,7 +70,23 @@ mongoose.connect(
   }
 );
 
-// SERVIDOR
+/*=================================================
+                    BD
+==================================================*/
 server.listen(process.env.PORT, () => {
   console.log(`ESCUCHANDO EN EL PUERTO ${process.env.PORT}`);
 });
+
+function escucharSockets() {
+  console.log('Escuchando conexiones - sockets');
+  io.on('connection', cliente => {
+
+    console.log('Cliente conectado');
+
+    // leads por usuario
+    sockets.leadsPorComercial(cliente, io);
+
+    //Desconectado
+    sockets.desconectar(cliente);
+  });
+}
