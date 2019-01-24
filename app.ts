@@ -13,8 +13,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { URLDB, PUERTO } from './config/config';
 
-
-
 const server = Server.instance;
 /*=================================================
                 Body Parser
