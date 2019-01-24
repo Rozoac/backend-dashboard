@@ -30,9 +30,7 @@ module.exports = {
         if (err) {
           return false;
         }
-        io.emit('respuesta-leads', {
-          leadGuardado,
-      })
+        io.emit('respuesta-leads',leadGuardado)
         return callback(null, leadGuardado)
       });
       });
