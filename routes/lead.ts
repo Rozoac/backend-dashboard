@@ -6,6 +6,51 @@ import Server from '../classes/server';
 const app = Router();
 
 // =============================
+// ACTUALIZAR LEAD
+// =============================
+
+app.put("/:id", (req, res) => {
+  var id = req.params.id;
+  var body = req.body;
+
+  Usuario.findById(id, (err:any, lead:any) => {
+    if (err) {
+      return res.status(500).json({
+        ok: false,
+        mensaje: "Error al buscar lead",
+        error: err
+      });
+    }
+
+    if (!lead) {
+      return res.status(400).json({
+        ok: false,
+        mensaje: "El lead con el id" + id + "no existe",
+        error: "No existe un lead con ese ID"
+      });
+    }
+
+    lead.id_semaforo = body.id_semaforo ;
+
+
+
+    lead.save((err:any, leadGuardado:any) => {
+      if (err) {
+        return res.status(500).json({
+          ok: false,
+          mensaje: "Error al actualizar lead",
+          error: err
+        });
+      }
+      res.status(200).json({
+        ok: true,
+        lead: leadGuardado
+      });
+    })
+  });
+});
+
+// =============================
 // OBTENER LEAD POR ID
 // =============================
 
