@@ -27,20 +27,22 @@ class CrearLead {
                 var lead = new lead_1.Lead({
                     id_usuario: comercial._id,
                     id_cliente: cliente._id,
-                    // id_semaforo: body.apellido,
+                    id_semaforo: '5c4b3f244bec0f00172a8dd1',
                     mensaje: cliente.mensaje,
                     fecha_creacion: moment_1.default().format('L'),
                     hora_creacion: moment_1.default().format('LT')
                 });
                 lead.populate({ path: 'id_cliente', populate: { path: 'id_ciudad', model: 'Ciudad' } }, (err) => {
                     lead.populate({ path: 'id_cliente', populate: { path: 'id_segmento', model: 'Segmento' } }, (err) => {
-                        lead.populate('id_usuario', (err) => {
-                            lead.save((err, leadGuardado) => {
-                                if (err) {
-                                    return false;
-                                }
-                                server.io.emit('respuesta-leads', leadGuardado);
-                                return callback(null, leadGuardado);
+                        lead.populate({ path: 'id_semaforo' }, (err) => {
+                            lead.populate('id_usuario', (err) => {
+                                lead.save((err, leadGuardado) => {
+                                    if (err) {
+                                        return false;
+                                    }
+                                    server.io.emit('respuesta-leads', leadGuardado);
+                                    return callback(null, leadGuardado);
+                                });
                             });
                         });
                     });
