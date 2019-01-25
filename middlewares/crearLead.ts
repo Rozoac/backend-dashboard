@@ -24,6 +24,7 @@ export class CrearLead {
         fecha_creacion: moment().format('L'),
         hora_creacion: moment().format('LT')
       });
+      lead.populate({path: 'id_cliente', populate: {path: 'id_ciudad', model: 'Ciudad'}},  (err:any) => {
       lead.populate({path: 'id_cliente', populate: {path: 'id_segmento', model: 'Segmento'}},  (err:any) => {
        lead.populate('id_usuario', (err:any) => {
          lead.save((err:any, leadGuardado:any) => {
@@ -35,6 +36,7 @@ export class CrearLead {
            return callback(null, leadGuardado)
           });
         });
+      });
       });
     })
   }
