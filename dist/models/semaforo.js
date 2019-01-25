@@ -6,4 +6,4 @@ exports.semaforoSchema = new mongoose_1.Schema({
     color: { type: String, required: [true, "El color es necesario"] },
 });
 exports.Semaforo = mongoose_1.model("Semaforo", exports.semaforoSchema);
-//prueba2
+//prueba23
