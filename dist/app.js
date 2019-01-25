@@ -10,6 +10,7 @@ const login_1 = __importDefault(require("./routes/login"));
 const rol_1 = __importDefault(require("./routes/rol"));
 const pais_1 = __importDefault(require("./routes/pais"));
 const ciudad_1 = __importDefault(require("./routes/ciudad"));
+const semaforo_1 = __importDefault(require("./routes/semaforo"));
 const segmento_1 = __importDefault(require("./routes/segmento"));
 const file_upload_1 = __importDefault(require("./routes/file-upload"));
 const cliente_1 = __importDefault(require("./routes/cliente"));
@@ -39,6 +40,7 @@ server.app.use("/login", login_1.default);
 server.app.use("/fileupload", file_upload_1.default);
 server.app.use("/cliente", cliente_1.default);
 server.app.use("/lead", lead_1.default);
+server.app.use("/semaforo", semaforo_1.default);
 // server.app.use("/upload", uploadRoutes);
 // server.app.use("/img", imagenesRoutes);
 /*=================================================

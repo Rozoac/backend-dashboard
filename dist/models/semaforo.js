@@ -1,7 +1,7 @@
 "use strict";
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
-var semaforoSchema = new Schema({
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = require("mongoose");
+exports.semaforoSchema = new mongoose_1.Schema({
     estado: { type: String, required: [true, "El estado es necesario"] },
 }, { collection: 'semaforos' });
-module.exports = mongoose.model("Semaforo", semaforoSchema);
+exports.Semaforo = mongoose_1.model("Semaforo", exports.semaforoSchema);

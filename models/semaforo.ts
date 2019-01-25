@@ -1,8 +1,8 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+import { Schema, model} from "mongoose";
 
-var semaforoSchema = new Schema({
+export var semaforoSchema = new Schema({
   estado: { type: String, required: [true, "El estado es necesario"] },
 }, {collection: 'semaforos'});
 
-module.exports = mongoose.model("Semaforo", semaforoSchema);
+export const Semaforo = model("Semaforo", semaforoSchema);
+

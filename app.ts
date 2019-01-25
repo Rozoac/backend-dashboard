@@ -5,6 +5,7 @@ import loginRoutes from "./routes/login";
 import rolRoutes from "./routes/rol";
 import paisRoutes from "./routes/pais";
 import ciudadRoutes from "./routes/ciudad";
+import semaforoRoutes from "./routes/semaforo";
 import segmentoRoutes from "./routes/segmento";
 import fileUploadRoutes from "./routes/file-upload";
 import clienteRoutes from "./routes/cliente";
@@ -38,6 +39,7 @@ server.app.use("/login", loginRoutes);
 server.app.use("/fileupload", fileUploadRoutes);
 server.app.use("/cliente", clienteRoutes);
 server.app.use("/lead", leadRoutes);
+server.app.use("/semaforo", semaforoRoutes);
 // server.app.use("/upload", uploadRoutes);
 // server.app.use("/img", imagenesRoutes);
 
