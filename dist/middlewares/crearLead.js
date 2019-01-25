@@ -14,6 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const usuario_1 = require("../models/usuario");
 const lead_1 = require("../models/lead");
 const moment_1 = __importDefault(require("moment"));
+const server_1 = __importDefault(require("../classes/server"));
 // =============================
 // Crear un lead nuevo
 // =============================
@@ -22,6 +23,7 @@ class CrearLead {
         this.crear = (cliente, callback) => {
             this.asignarComercial(cliente.id_segmento, cliente.id_pais, (err, user) => {
                 const comercial = this.getRandomString(user);
+                const server = server_1.default.instance;
                 var lead = new lead_1.Lead({
                     id_usuario: comercial._id,
                     id_cliente: cliente._id,
@@ -36,7 +38,7 @@ class CrearLead {
                             if (err) {
                                 return false;
                             }
-                            // io.emit('respuesta-leads',leadGuardado)
+                            server.io.emit('respuesta-leads', leadGuardado);
                             return callback(null, leadGuardado);
                         });
                     });

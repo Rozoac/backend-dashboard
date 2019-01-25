@@ -1,6 +1,7 @@
 import {Usuario} from "../models/usuario";
 import {Lead} from "../models/lead";
 import moment from "moment";
+import Server from '../classes/server';
 
 
 
@@ -14,6 +15,7 @@ export class CrearLead {
    public crear = (cliente:any, callback:any) => {
     this.asignarComercial(cliente.id_segmento, cliente.id_pais, (err:any, user:any) => {
       const comercial = this.getRandomString(user);
+      const server = Server.instance;
       var lead = new Lead({
         id_usuario: comercial._id,
         id_cliente: cliente._id,
@@ -28,7 +30,8 @@ export class CrearLead {
         if (err) {
           return false;
         }
-        // io.emit('respuesta-leads',leadGuardado)
+
+        server.io.emit('respuesta-leads',leadGuardado);
         return callback(null, leadGuardado)
       });
       });

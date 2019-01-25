@@ -13,10 +13,9 @@ app.get("/:id", (req:Request, res:Response, next:any) => {
   var id = req.params.id;
   var desde = req.query.desde || 0;
   desde = Number(desde);
-
   Lead.find({'id_usuario': id})
   .populate({
-    path: "id_cliente",
+    path: "id_cliente", 
     // select: 'url fecha text route_image menu slide',
     populate: {
       path: 'id_segmento',
