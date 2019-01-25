@@ -5,3 +5,4 @@ exports.semaforoSchema = new mongoose_1.Schema({
     estado: { type: String, required: [true, "El estado es necesario"] },
 });
 exports.Semaforo = mongoose_1.model("Semaforo", exports.semaforoSchema);
+//prueba

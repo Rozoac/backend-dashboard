@@ -5,4 +5,5 @@ export var semaforoSchema = new Schema({
 });
 
 export const Semaforo = model("Semaforo", semaforoSchema);
+//prueba
 
