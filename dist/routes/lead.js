@@ -47,8 +47,8 @@ app.put("/:id", (req, res) => {
 // =============================
 app.get("/:id", (req, res, next) => {
     var id = req.params.id;
-    var desde = req.query.desde || 0;
-    desde = Number(desde);
+    // var desde = req.query.desde || 0;
+    // desde = Number(desde);
     lead_1.Lead.find({ 'id_usuario': id })
         .populate({
         path: "id_cliente",
@@ -69,8 +69,8 @@ app.get("/:id", (req, res, next) => {
         }
     })
         .populate('id_semaforo')
-        .skip(desde)
-        .limit(10)
+        // .skip(desde)
+        // .limit(10)
         .exec((err, leads) => {
         if (err) {
             return res.status(500).json({
