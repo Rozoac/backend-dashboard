@@ -32,6 +32,7 @@ app.get("/:id", (req:Request, res:Response, next:any) => {
       // select: 'autenticacion direccion'
     }
   })
+  .populate('id_semaforo')
   .skip(desde)
   .limit(10)
   .exec((err:any, leads:any) => {
