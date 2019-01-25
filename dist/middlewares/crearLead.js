@@ -32,7 +32,7 @@ class CrearLead {
                     fecha_creacion: moment_1.default().format('L'),
                     hora_creacion: moment_1.default().format('LT')
                 });
-                lead.populate('id_cliente', (err) => {
+                lead.populate({ path: 'id_cliente', populate: { path: 'id_segmento', model: 'Segmento' } }, (err) => {
                     lead.populate('id_usuario', (err) => {
                         lead.save((err, leadGuardado) => {
                             if (err) {
