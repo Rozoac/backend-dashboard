@@ -5,7 +5,6 @@ export var semaforoSchema = new Schema({
   color: { type: String, required: [true, "El color es necesario"] },
 
 });
-
 export const Semaforo = model("Semaforo", semaforoSchema);
 //prueba
 
