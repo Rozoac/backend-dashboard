@@ -25,20 +25,18 @@ app.put("/:id", (req, res) => {
             });
         }
         lead.id_semaforo = '5c4b576af1848a00177ab14a';
-        lead.populate('id_semaforo', (err) => {
-            lead.save((err, leadGuardado) => {
-                if (err) {
-                    return res.status(500).json({
-                        ok: false,
-                        mensaje: "Error al actualizar lead",
-                        error: err
-                    });
-                }
-                res.status(200).json({
-                    ok: true,
-                    lead: leadGuardado
+        lead.save((err, leadGuardado) => {
+            if (err) {
+                return res.status(500).json({
+                    ok: false,
+                    mensaje: "Error al actualizar lead",
+                    error: err
                 });
-            }).populate('id_semaforo');
+            }
+            res.status(200).json({
+                ok: true,
+                lead: leadGuardado
+            });
         });
     });
 });
