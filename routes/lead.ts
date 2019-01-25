@@ -33,7 +33,7 @@ app.put("/:id", (req, res) => {
     lead.id_semaforo = '5c4b576af1848a00177ab14a' ;
 
 
-
+    lead.populate('id_semaforo',(err:any) => {
     lead.save((err:any, leadGuardado:any) => {
       if (err) {
         return res.status(500).json({
@@ -46,8 +46,9 @@ app.put("/:id", (req, res) => {
         ok: true,
         lead: leadGuardado
       });
-    })
+    }).populate('id_semaforo')
   });
+});
 });
 
 // =============================
