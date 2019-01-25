@@ -24,17 +24,17 @@ export class CrearLead {
         fecha_creacion: moment().format('L'),
         hora_creacion: moment().format('LT')
       });
-      lead.populate('id_usuario', (err:any) => {
       lead.populate('id_cliente', (err:any) => {
-      lead.save((err:any, leadGuardado:any) => {
-        if (err) {
+       lead.populate('id_usuario', (err:any) => {
+         lead.save((err:any, leadGuardado:any) => {
+          if (err) {
           return false;
-        }
+         }
 
-        server.io.emit('respuesta-leads',leadGuardado);
-        return callback(null, leadGuardado)
-      });
-      });
+           server.io.emit('respuesta-leads',leadGuardado);
+           return callback(null, leadGuardado)
+          });
+        });
       });
     })
   }
