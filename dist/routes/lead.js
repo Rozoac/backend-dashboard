@@ -24,7 +24,7 @@ app.put("/:id", (req, res) => {
                 error: "No existe un lead con ese ID"
             });
         }
-        lead.id_semaforo = body.id_semaforo;
+        lead.id_semaforo = '5c4b576af1848a00177ab14a';
         lead.save((err, leadGuardado) => {
             if (err) {
                 return res.status(500).json({

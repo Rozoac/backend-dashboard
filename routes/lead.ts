@@ -30,7 +30,7 @@ app.put("/:id", (req, res) => {
       });
     }
 
-    lead.id_semaforo = body.id_semaforo ;
+    lead.id_semaforo = '5c4b576af1848a00177ab14a' ;
 
 
 
