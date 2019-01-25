@@ -9,7 +9,7 @@ const app = express_1.Router();
 app.put("/:id", (req, res) => {
     var id = req.params.id;
     var body = req.body;
-    Usuario.findById(id, (err, lead) => {
+    lead_1.Lead.findById(id, (err, lead) => {
         if (err) {
             return res.status(500).json({
                 ok: false,

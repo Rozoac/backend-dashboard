@@ -13,7 +13,7 @@ app.put("/:id", (req, res) => {
   var id = req.params.id;
   var body = req.body;
 
-  Usuario.findById(id, (err:any, lead:any) => {
+  Lead.findById(id, (err:any, lead:any) => {
     if (err) {
       return res.status(500).json({
         ok: false,
