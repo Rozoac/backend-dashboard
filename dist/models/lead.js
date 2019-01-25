@@ -4,7 +4,7 @@ const mongoose_1 = require("mongoose");
 exports.leadSchema = new mongoose_1.Schema({
     id_usuario: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Usuario' },
     id_cliente: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Cliente' },
-    id_semaforo: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Semaforo' },
+    id_semaforo: { type: mongoose_1.Schema.Types.ObjectId, default: '5c4b3f244bec0f00172a8dd1', ref: 'Semaforo' },
     mensaje: { type: String, required: false },
     fecha_creacion: { type: String, required: true },
     hora_creacion: { type: String, required: true },

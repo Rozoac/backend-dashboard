@@ -19,7 +19,7 @@ export class CrearLead {
       var lead = new Lead({
         id_usuario: comercial._id,
         id_cliente: cliente._id,
-        id_semaforo: '5c4b3f244bec0f00172a8dd1',
+        //id_semaforo: '5c4b3f244bec0f00172a8dd1',
         mensaje: cliente.mensaje,
         fecha_creacion: moment().format('L'),
         hora_creacion: moment().format('LT')
