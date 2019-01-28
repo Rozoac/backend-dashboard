@@ -1,12 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -16,19 +8,6 @@ const lead_1 = require("../models/lead");
 const server_1 = __importDefault(require("../classes/server"));
 const app = express_1.Router();
 const server = server_1.default.instance;
-function prueba(id) {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield lead_1.Lead.find({ 'id_usuario': id })
-            .exec((err, leads) => {
-            if (err) {
-                server.io.emit('leads-nuevos', err);
-            }
-            console.log(leads + "la respuesta");
-            console.log(id + "el id");
-            server.io.emit('leads-nuevos', leads);
-        });
-    });
-}
 // =============================
 // ACTUALIZAR ESTADO DEL SEMAFORO LEAD A ROJO
 // =============================
@@ -36,41 +15,36 @@ app.put("/:id", (req, res) => {
     var id = req.params.id;
     var body = req.body;
     lead_1.Lead.findById(id, (err, lead) => {
-        actualizarEstado(id, res, err);
-        function actualizarEstado(id, res, err) {
-            return __awaiter(this, void 0, void 0, function* () {
-                if (err) {
-                    return res.status(500).json({
-                        ok: false,
-                        mensaje: "Error al buscar lead",
-                        error: err
-                    });
-                }
-                if (!lead) {
-                    return res.status(400).json({
-                        ok: false,
-                        mensaje: "El lead con el id" + id + "no existe",
-                        error: "No existe un lead con ese ID"
-                    });
-                }
-                lead.id_semaforo = '5c4b576af1848a00177ab14a';
-                lead.save((err, leadGuardado) => {
-                    if (err) {
-                        return res.status(500).json({
-                            ok: false,
-                            mensaje: "Error al actualizar lead",
-                            error: err
-                        });
-                    }
-                    //bsuqueda de lead  s
-                    res.status(200).json({
-                        ok: true,
-                        lead: leadGuardado
-                    });
-                });
-                yield prueba(id);
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                mensaje: "Error al buscar lead",
+                error: err
             });
         }
+        if (!lead) {
+            return res.status(400).json({
+                ok: false,
+                mensaje: "El lead con el id" + id + "no existe",
+                error: "No existe un lead con ese ID"
+            });
+        }
+        lead.id_semaforo = '5c4b576af1848a00177ab14a';
+        lead.save((err, leadGuardado) => {
+            if (err) {
+                return res.status(500).json({
+                    ok: false,
+                    mensaje: "Error al actualizar lead",
+                    error: err
+                });
+            }
+            //bsuqueda de lead
+            server.io.emit('leads-nuevos', leadGuardado);
+            res.status(200).json({
+                ok: true,
+                lead: leadGuardado
+            });
+        });
     });
 });
 // =============================

@@ -6,21 +6,6 @@ import Server from '../classes/server';
 const app = Router();
 const server = Server.instance;
 
-async function prueba(id:any){
- await Lead.find({'id_usuario' : id })
-   
-        .exec((err:any, leads:any) => {
-          if (err) {
-            server.io.emit('leads-nuevos',err);
-          }
-        
-            console.log(leads + "la respuesta");
-            console.log(id+ "el id");
-            server.io.emit('leads-nuevos',leads);
-        });
-
-}
-
 // =============================
 // ACTUALIZAR ESTADO DEL SEMAFORO LEAD A ROJO
 // =============================
@@ -28,19 +13,14 @@ async function prueba(id:any){
 app.put("/:id", (req, res) => {
   var id = req.params.id;
   var body = req.body;
-  
+
   Lead.findById(id, (err:any, lead:any) => {
-    actualizarEstado(id, res, err)
-    async function actualizarEstado(id:any, res:any, err:any){
-    
     if (err) {
       return res.status(500).json({
         ok: false,
         mensaje: "Error al buscar lead",
         error: err
-        
       });
-      
     }
 
     if (!lead) {
@@ -62,19 +42,16 @@ app.put("/:id", (req, res) => {
           error: err
         });
       }
-        //bsuqueda de lead  s
-         
-        
-        
+        //bsuqueda de lead
+        server.io.emit('leads-nuevos',leadGuardado);
+
       res.status(200).json({
         ok: true,
         lead: leadGuardado
       });
     })
-    await prueba(id);
-  }
-})
-})
+});
+});
 
 // =============================
 // OBTENER LEAD POR ID
