@@ -35,6 +35,7 @@ app.put("/:id", (req, res) => {
 
 
     lead.save((err:any, leadGuardado:any) => {
+      console.log(leadGuardado);
       if (err) {
         return res.status(500).json({
           ok: false,
@@ -43,8 +44,7 @@ app.put("/:id", (req, res) => {
         });
       }
         //bsuqueda de lead
-        console.log(leadGuardado);
-        server.io.emit('leads-nuevos',leadGuardado);
+        server.io.emit('leads-nuevos','llego algo!');
 
       res.status(200).json({
         ok: true,
