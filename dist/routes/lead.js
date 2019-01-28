@@ -39,6 +39,7 @@ app.put("/:id", (req, res) => {
                 });
             }
             //bsuqueda de lead
+            console.log(leadGuardado);
             server.io.emit('leads-nuevos', leadGuardado);
             res.status(200).json({
                 ok: true,
