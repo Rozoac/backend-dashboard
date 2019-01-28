@@ -118,7 +118,7 @@ app.get("/nuevo/:id", (req:Request, res:Response, next:any) => {
       model: 'ciudad'
     }
   })
-  .populate('id_semaforo')
+  
  
   .exec((err:any, leads:any) => {
     if (err) {
@@ -128,7 +128,7 @@ app.get("/nuevo/:id", (req:Request, res:Response, next:any) => {
         error: err
       });
     }
-    Lead.count({id_usuario : id, 'id_semaforo._id': '5c4b5744f1848a00177ab148'}, (err:any, conteo:any) => {
+    Lead.count({id_usuario : id, id_semaforo : '5c4b5744f1848a00177ab148'}, (err:any, conteo:any) => {
       res.status(200).json({
         ok: true,
         leads,
