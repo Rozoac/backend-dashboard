@@ -91,7 +91,7 @@ app.get("/:id", (req, res, next) => {
 // =============================
 app.get("/nuevo/:id", (req, res, next) => {
     var id = req.params.id;
-    lead_1.Lead.find({ id_usuario: id })
+    lead_1.Lead.find({ id_usuario: id, id_semaforo: '5c4b5744f1848a00177ab148' })
         .populate({
         path: "id_cliente",
         populate: {
