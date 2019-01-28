@@ -40,29 +40,13 @@ app.put("/:id", (req, res) => {
             }
             //bsuqueda de lead 
             lead_1.Lead.find({ 'id_usuario': id })
-                .populate({
-                path: "id_cliente",
-                populate: {
-                    path: 'id_segmento',
-                    model: 'Segmento'
-                }
-            })
-                .populate({
-                path: "id_cliente",
-                populate: {
-                    path: 'id_ciudad',
-                    model: 'ciudad'
-                }
-            })
                 .exec((err, leads) => {
                 if (err) {
                     server.io.emit('leads-nuevos', err);
                 }
-                lead_1.Lead.count({ id_usuario: id, id_semaforo: '5c4b5744f1848a00177ab148' }, (err, conteo) => {
-                    console.log(leads + "la respuesta");
-                    console.log(id + "el id");
-                    server.io.emit('leads-nuevos', leads);
-                });
+                console.log(leads + "la respuesta");
+                console.log(id + "el id");
+                server.io.emit('leads-nuevos', leads);
             });
             res.status(200).json({
                 ok: true,
