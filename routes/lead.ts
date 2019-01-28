@@ -6,7 +6,7 @@ import Server from '../classes/server';
 const app = Router();
 
 // =============================
-// ACTUALIZAR LEAD
+// ACTUALIZAR ESTADO DEL SEMAFORO LEAD A ROJO
 // =============================
 
 app.put("/:id", (req, res) => {
@@ -88,6 +88,47 @@ app.get("/:id", (req:Request, res:Response, next:any) => {
       });
     }
     Lead.count({'id_usuario': id}, (err:any, conteo:any) => {
+      res.status(200).json({
+        ok: true,
+        leads,
+        total: conteo
+      });
+    });
+  });
+});
+// =============================
+// OBTENER LEAD SIN LEER
+// =============================
+
+app.get("/nuevo/:id", (req:Request, res:Response, next:any) => {
+  var id = req.params.id;
+  
+  Lead.find({'id_usuario': id, 'id_semaforo._id': '5c4b5744f1848a00177ab148'})
+  .populate({
+    path: "id_cliente", 
+    populate: {
+      path: 'id_segmento',
+      model: 'Segmento'
+    }
+  })
+  .populate({
+    path: "id_cliente",
+    populate: {
+      path: 'id_ciudad',
+      model: 'ciudad'
+    }
+  })
+  .populate('id_semaforo')
+ 
+  .exec((err:any, leads:any) => {
+    if (err) {
+      return res.status(500).json({
+        ok: false,
+        mensaje: "Error cargando leads",
+        error: err
+      });
+    }
+    Lead.count({'id_usuario': id, 'id_semaforo._id': '5c4b5744f1848a00177ab148'}, (err:any, conteo:any) => {
       res.status(200).json({
         ok: true,
         leads,
