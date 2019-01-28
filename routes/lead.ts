@@ -4,6 +4,7 @@ import Server from '../classes/server';
 
 
 const app = Router();
+const server = Server.instance;
 
 // =============================
 // ACTUALIZAR ESTADO DEL SEMAFORO LEAD A ROJO
@@ -41,6 +42,38 @@ app.put("/:id", (req, res) => {
           error: err
         });
       }
+        //bsuqueda de lead 
+        Lead.find({id_usuario : id , id_semaforo: '5c4b5744f1848a00177ab148'})
+        .populate({
+          path: "id_cliente", 
+          populate: {
+            path: 'id_segmento',
+            model: 'Segmento'
+          }
+        })
+        .populate({
+          path: "id_cliente",
+          populate: {
+            path: 'id_ciudad',
+            model: 'ciudad'
+          }
+        })
+        .exec((err:any, leads:any) => {
+          if (err) {
+            return res.status(500).json({
+              ok: false,
+              mensaje: "Error cargando leads",
+              error: err
+            });
+          }
+          Lead.count({id_usuario : id, id_semaforo : '5c4b5744f1848a00177ab148'}, (err:any, conteo:any) => {
+            server.io.emit('leads-nuevos',{
+              leads: leads,
+              total: conteo
+            });
+          });
+        });
+
 
       res.status(200).json({
         ok: true,
@@ -102,44 +135,40 @@ app.get("/:id", (req:Request, res:Response, next:any) => {
 // =============================
 
 app.get("/nuevo/:id", (req:Request, res:Response, next:any) => {
-  leadSinleer(req,res);
-  async function leadSinleer(req:any, res:any){
-    var id = req.params.id;
+  var id = req.params.id;
   
-    Lead.find({id_usuario : id , id_semaforo: '5c4b5744f1848a00177ab148'})
-    .populate({
-      path: "id_cliente", 
-      populate: {
-        path: 'id_segmento',
-        model: 'Segmento'
-      }
-    })
-    .populate({
-      path: "id_cliente",
-      populate: {
-        path: 'id_ciudad',
-        model: 'ciudad'
-      }
-    })
-    
-   
-    .exec((err:any, leads:any) => {
-      if (err) {
-        return res.status(500).json({
-          ok: false,
-          mensaje: "Error cargando leads",
-          error: err
-        });
-      }
-      Lead.count({id_usuario : id, id_semaforo : '5c4b5744f1848a00177ab148'}, (err:any, conteo:any) => {
-        res.status(200).json({
-          ok: true,
-          leads,
-          total: conteo
-        });
+  Lead.find({id_usuario : id , id_semaforo: '5c4b5744f1848a00177ab148'})
+  .populate({
+    path: "id_cliente", 
+    populate: {
+      path: 'id_segmento',
+      model: 'Segmento'
+    }
+  })
+  .populate({
+    path: "id_cliente",
+    populate: {
+      path: 'id_ciudad',
+      model: 'ciudad'
+    }
+  })
+  
+ 
+  .exec((err:any, leads:any) => {
+    if (err) {
+      return res.status(500).json({
+        ok: false,
+        mensaje: "Error cargando leads",
+        error: err
+      });
+    }
+    Lead.count({id_usuario : id, id_semaforo : '5c4b5744f1848a00177ab148'}, (err:any, conteo:any) => {
+      res.status(200).json({
+        ok: true,
+        leads,
+        total: conteo
       });
     });
-  }
-  
+  });
 });
 export default app;

@@ -1,16 +1,13 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const lead_1 = require("../models/lead");
+const server_1 = __importDefault(require("../classes/server"));
 const app = express_1.Router();
+const server = server_1.default.instance;
 // =============================
 // ACTUALIZAR ESTADO DEL SEMAFORO LEAD A ROJO
 // =============================
@@ -41,6 +38,37 @@ app.put("/:id", (req, res) => {
                     error: err
                 });
             }
+            //bsuqueda de lead 
+            lead_1.Lead.find({ id_usuario: id, id_semaforo: '5c4b5744f1848a00177ab148' })
+                .populate({
+                path: "id_cliente",
+                populate: {
+                    path: 'id_segmento',
+                    model: 'Segmento'
+                }
+            })
+                .populate({
+                path: "id_cliente",
+                populate: {
+                    path: 'id_ciudad',
+                    model: 'ciudad'
+                }
+            })
+                .exec((err, leads) => {
+                if (err) {
+                    return res.status(500).json({
+                        ok: false,
+                        mensaje: "Error cargando leads",
+                        error: err
+                    });
+                }
+                lead_1.Lead.count({ id_usuario: id, id_semaforo: '5c4b5744f1848a00177ab148' }, (err, conteo) => {
+                    server.io.emit('leads-nuevos', {
+                        leads: leads,
+                        total: conteo
+                    });
+                });
+            });
             res.status(200).json({
                 ok: true,
                 lead: leadGuardado
@@ -98,42 +126,37 @@ app.get("/:id", (req, res, next) => {
 // OBTENER LEAD SIN LEER
 // =============================
 app.get("/nuevo/:id", (req, res, next) => {
-    leadSinleer(req, res);
-    function leadSinleer(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            var id = req.params.id;
-            lead_1.Lead.find({ id_usuario: id, id_semaforo: '5c4b5744f1848a00177ab148' })
-                .populate({
-                path: "id_cliente",
-                populate: {
-                    path: 'id_segmento',
-                    model: 'Segmento'
-                }
-            })
-                .populate({
-                path: "id_cliente",
-                populate: {
-                    path: 'id_ciudad',
-                    model: 'ciudad'
-                }
-            })
-                .exec((err, leads) => {
-                if (err) {
-                    return res.status(500).json({
-                        ok: false,
-                        mensaje: "Error cargando leads",
-                        error: err
-                    });
-                }
-                lead_1.Lead.count({ id_usuario: id, id_semaforo: '5c4b5744f1848a00177ab148' }, (err, conteo) => {
-                    res.status(200).json({
-                        ok: true,
-                        leads,
-                        total: conteo
-                    });
-                });
+    var id = req.params.id;
+    lead_1.Lead.find({ id_usuario: id, id_semaforo: '5c4b5744f1848a00177ab148' })
+        .populate({
+        path: "id_cliente",
+        populate: {
+            path: 'id_segmento',
+            model: 'Segmento'
+        }
+    })
+        .populate({
+        path: "id_cliente",
+        populate: {
+            path: 'id_ciudad',
+            model: 'ciudad'
+        }
+    })
+        .exec((err, leads) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                mensaje: "Error cargando leads",
+                error: err
+            });
+        }
+        lead_1.Lead.count({ id_usuario: id, id_semaforo: '5c4b5744f1848a00177ab148' }, (err, conteo) => {
+            res.status(200).json({
+                ok: true,
+                leads,
+                total: conteo
             });
         });
-    }
+    });
 });
 exports.default = app;
