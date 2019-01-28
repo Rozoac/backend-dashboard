@@ -1,4 +1,12 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const lead_1 = require("../models/lead");
@@ -90,37 +98,42 @@ app.get("/:id", (req, res, next) => {
 // OBTENER LEAD SIN LEER
 // =============================
 app.get("/nuevo/:id", (req, res, next) => {
-    var id = req.params.id;
-    lead_1.Lead.find({ id_usuario: id, id_semaforo: '5c4b5744f1848a00177ab148' })
-        .populate({
-        path: "id_cliente",
-        populate: {
-            path: 'id_segmento',
-            model: 'Segmento'
-        }
-    })
-        .populate({
-        path: "id_cliente",
-        populate: {
-            path: 'id_ciudad',
-            model: 'ciudad'
-        }
-    })
-        .exec((err, leads) => {
-        if (err) {
-            return res.status(500).json({
-                ok: false,
-                mensaje: "Error cargando leads",
-                error: err
-            });
-        }
-        lead_1.Lead.count({ id_usuario: id, id_semaforo: '5c4b5744f1848a00177ab148' }, (err, conteo) => {
-            res.status(200).json({
-                ok: true,
-                leads,
-                total: conteo
+    leadSinleer(req, res);
+    function leadSinleer(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var id = req.params.id;
+            lead_1.Lead.find({ id_usuario: id, id_semaforo: '5c4b5744f1848a00177ab148' })
+                .populate({
+                path: "id_cliente",
+                populate: {
+                    path: 'id_segmento',
+                    model: 'Segmento'
+                }
+            })
+                .populate({
+                path: "id_cliente",
+                populate: {
+                    path: 'id_ciudad',
+                    model: 'ciudad'
+                }
+            })
+                .exec((err, leads) => {
+                if (err) {
+                    return res.status(500).json({
+                        ok: false,
+                        mensaje: "Error cargando leads",
+                        error: err
+                    });
+                }
+                lead_1.Lead.count({ id_usuario: id, id_semaforo: '5c4b5744f1848a00177ab148' }, (err, conteo) => {
+                    res.status(200).json({
+                        ok: true,
+                        leads,
+                        total: conteo
+                    });
+                });
             });
         });
-    });
+    }
 });
 exports.default = app;
