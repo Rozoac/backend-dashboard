@@ -29,8 +29,8 @@ class CrearLead {
                     id_cliente: cliente._id,
                     //id_semaforo: '5c4b3f244bec0f00172a8dd1',
                     mensaje: cliente.mensaje,
-                    fecha_creacion: moment_1.default().format('L'),
-                    hora_creacion: moment_1.default().format('LT')
+                    fecha_creacion: moment_1.default().subtract(5, 'h').format('L'),
+                    hora_creacion: moment_1.default().subtract(5, 'h').format('LT')
                 });
                 lead.populate({ path: 'id_cliente', populate: { path: 'id_ciudad', model: 'Ciudad' } }, (err) => {
                     lead.populate({ path: 'id_cliente', populate: { path: 'id_segmento', model: 'Segmento' } }, (err) => {

@@ -30,8 +30,7 @@ app.get("/", (req, res, next) => {
 app.post("/", (req, res) => {
     var body = req.body;
     var semaforo = new semaforo_1.Semaforo({
-        estado: body.estado,
-        color: body.color
+        estado: body.estado
         // fecha_creacion: moment().format('L'),
         // hora_creacion: moment().format('LT')
     });
