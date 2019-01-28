@@ -43,7 +43,7 @@ app.put("/:id", (req, res) => {
         });
       }
         //bsuqueda de lead 
-        Lead.find({id_usuario : id , id_semaforo: '5c4b5744f1848a00177ab148'})
+        Lead.find({'id_usuario' : id })
         .populate({
           path: "id_cliente", 
           populate: {
@@ -60,11 +60,7 @@ app.put("/:id", (req, res) => {
         })
         .exec((err:any, leads:any) => {
           if (err) {
-            return res.status(500).json({
-              ok: false,
-              mensaje: "Error cargando leads",
-              error: err
-            });
+            server.io.emit('leads-nuevos',err);
           }
           Lead.count({id_usuario : id, id_semaforo : '5c4b5744f1848a00177ab148'}, (err:any, conteo:any) => {
             console.log(leads + "la respuesta");
