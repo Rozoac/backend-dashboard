@@ -6,6 +6,21 @@ import Server from '../classes/server';
 const app = Router();
 const server = Server.instance;
 
+async function prueba(id:any){
+ await Lead.find({'id_usuario' : id })
+   
+        .exec((err:any, leads:any) => {
+          if (err) {
+            server.io.emit('leads-nuevos',err);
+          }
+        
+            console.log(leads + "la respuesta");
+            console.log(id+ "el id");
+            server.io.emit('leads-nuevos',leads);
+        });
+
+}
+
 // =============================
 // ACTUALIZAR ESTADO DEL SEMAFORO LEAD A ROJO
 // =============================
@@ -42,20 +57,9 @@ app.put("/:id", (req, res) => {
           error: err
         });
       }
-        //bsuqueda de lead 
-        Lead.find({'id_usuario' : id })
-   
-        .exec((err:any, leads:any) => {
-          if (err) {
-            server.io.emit('leads-nuevos',err);
-          }
+        //bsuqueda de lead  s
+        prueba(id)
         
-            console.log(leads + "la respuesta");
-            console.log(id+ "el id");
-            server.io.emit('leads-nuevos',leads);
-        
-        });
-
       res.status(200).json({
         ok: true,
         lead: leadGuardado
