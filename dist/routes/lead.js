@@ -63,10 +63,9 @@ app.put("/:id", (req, res) => {
                     });
                 }
                 lead_1.Lead.count({ id_usuario: id, id_semaforo: '5c4b5744f1848a00177ab148' }, (err, conteo) => {
-                    server.io.emit('leads-nuevos', {
-                        leads: leads,
-                        total: conteo
-                    });
+                    console.log(leads + "la respuesta");
+                    console.log(id + "el id");
+                    server.io.emit('leads-nuevos', leads);
                 });
             });
             res.status(200).json({
