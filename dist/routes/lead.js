@@ -115,7 +115,7 @@ app.get("/nuevo/:id", (req, res, next) => {
                 error: err
             });
         }
-        lead_1.Lead.count({ 'id_usuario': id, 'id_semaforo._id': '5c4b5744f1848a00177ab148' }, (err, conteo) => {
+        lead_1.Lead.count({ id_usuario: id }, (err, conteo) => {
             res.status(200).json({
                 ok: true,
                 leads,
